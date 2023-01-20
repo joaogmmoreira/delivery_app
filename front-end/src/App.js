@@ -1,6 +1,6 @@
-import React from "react";
-import "./App.css";
-import rockGlass from "./images/rockGlass.svg";
+import React from 'react'
+import './App.css'
+import rockGlass from './images/rockGlass.svg'
 
 function App() {
   return (
@@ -10,7 +10,7 @@ function App() {
         Glass
       </object>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
