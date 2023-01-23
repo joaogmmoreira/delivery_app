@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { loginService } from '../../services/useLoginService';
 
 export default function LoginPage() {
+  const [doesUserExist, setDoesUserExist] = useState(true);
   const [isValidEmail, setIsValidEmail] = useState(false);
   const [isValidPassword, setIsValidPassword] = useState(false);
   const [isLoginBtnDisabled, setIsLoginBtnDisabled] = useState(true);
@@ -36,12 +37,18 @@ export default function LoginPage() {
   }, [isValidEmail, isValidPassword]);
 
   async function handleOnClickLoginBtn() {
-    const response = await loginService({
-      email,
-      password,
-    });
+    setDoesUserExist(true);
+    try {
+      const response = await loginService({
+        email,
+        password,
+      });
 
-    console.log(response);
+      console.log(response);
+    } catch (e) {
+      setDoesUserExist(false);
+      console.log(e);
+    }
   }
 
   return (
@@ -80,7 +87,7 @@ export default function LoginPage() {
       </button>
 
       {
-        !isValidEmail && (
+        !doesUserExist && (
           <p
             data-testid="common_login__element-invalid-email"
           >
