@@ -1,6 +1,7 @@
 const { loginService } = require('../services');
 
 const validateLogin = async (req, res) => {
+  console.log('>> controller login');
   const { email, password } = req.body;
 
   const { type, message } = await loginService.login({ email, password });
