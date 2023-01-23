@@ -36,7 +36,6 @@ export default function LoginPage() {
 
   return (
     <div>
-
       <input
         type="text"
         data-testid="common_login__input-email"
@@ -76,7 +75,8 @@ export default function LoginPage() {
             data-testid="common_login__element-invalid-email"
           >
             This email is invalid!
-          </p>)
+          </p>
+        )
       }
     </div>
   );
