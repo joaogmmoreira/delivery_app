@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import loginService from '../../services/useLoginService';
 
 export default function LoginPage() {
   const [isValidEmail, setIsValidEmail] = useState(false);
@@ -34,6 +35,15 @@ export default function LoginPage() {
     setIsLoginBtnDisabled(false);
   }, [isValidEmail, isValidPassword]);
 
+  async function handleOnClickLoginBtn() {
+    const response = await loginService({
+      email,
+      password,
+    });
+
+    console.log(response);
+  }
+
   return (
     <div>
       <input
@@ -54,7 +64,7 @@ export default function LoginPage() {
 
       <button
         data-testid="common_login__button-login"
-        onClick={ () => { } }
+        onClick={ handleOnClickLoginBtn }
         type="button"
         disabled={ isLoginBtnDisabled }
       >
