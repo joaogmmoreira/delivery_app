@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import loginService from '../../services/useLoginService';
+import { loginService } from '../../services/useLoginService';
 
 export default function LoginPage() {
   const [isValidEmail, setIsValidEmail] = useState(false);
