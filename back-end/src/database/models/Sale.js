@@ -40,4 +40,4 @@ const SaleModel = (sequelize, DataType) => {
   return Sale;
 };
 
-module.exports = Sale;
+module.exports = SaleModel;

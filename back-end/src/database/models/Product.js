@@ -30,4 +30,4 @@ const ProductModel = (sequelize, DataType) => {
   return Product;
 };
 
-module.exports = Product;
+module.exports = ProductModel;

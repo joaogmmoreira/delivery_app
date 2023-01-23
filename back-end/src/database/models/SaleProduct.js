@@ -1,6 +1,6 @@
 const SaleProductModel = (sequelize, DataType) => {
   const SaleProduct = sequelize.define(
-    "SaleProduct",
+    'SaleProduct',
     {
       saleId: {
         type: DataType.INTEGER,
@@ -16,26 +16,26 @@ const SaleProductModel = (sequelize, DataType) => {
     {
       timestamps: false,
       underscored: true,
-      tableName: "salesProducts",
+      tableName: 'salesProducts',
     }
   );
-  
+
   SaleProduct.associate = (models) => {
-    Sale.belongsTo(models.Sale, {
-      as:'sales',
+    SaleProduct.belongsTo(models.Sale, {
+      as: 'sales',
       foreignKey: 'sale_id',
       onDelete: 'cascade',
-      onUpdate: 'cascade'
-    })
-    Sale.belongsTo(models.Product, {
-      as:'products',
+      onUpdate: 'cascade',
+    });
+    SaleProduct.belongsTo(models.Product, {
+      as: 'products',
       foreignKey: 'product_id',
       onDelete: 'cascade',
-      onUpdate: 'cascade'
-    })
-  }
+      onUpdate: 'cascade',
+    });
+  };
 
-  return Sale;
+  return SaleProduct; 
 };
 
-module.exports = Sale;
+module.exports = SaleProductModel;

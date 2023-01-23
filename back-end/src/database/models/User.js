@@ -28,7 +28,7 @@ const UserModel = (sequelize, DataType) => {
     })
 
     User.hasMany(models.Sale, {
-      as:'sales',
+      as:'sale',
       foreignKey: 'seller_id',
       onDelete: 'cascade',
       onUpdate: 'cascade'
