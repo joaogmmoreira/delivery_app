@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { loginService } from '../../services/useLoginService';
 
 export default function LoginPage() {
@@ -9,6 +10,8 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const history = useHistory();
 
   function getIsValidEmailByStr(str) {
     return /\S+@\S+\.\S+/.test(str);
@@ -50,6 +53,8 @@ export default function LoginPage() {
       localStorage.setItem('email', response.data.token.email);
       localStorage.setItem('role', response.data.token.role);
       localStorage.setItem('token', response.data.token.token);
+
+      history.push('/customer/products');
     } catch (e) {
       setDoesUserExist(false);
       console.log(e);
