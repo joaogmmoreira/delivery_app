@@ -90,7 +90,7 @@ export default function LoginPage() {
 
       <button
         data-testid="common_login__button-register"
-        onClick={ () => { } }
+        onClick={ () => { history.push('/register'); } }
         type="button"
       >
         Register
