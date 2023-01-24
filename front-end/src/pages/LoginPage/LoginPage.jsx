@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { loginService } from '../../services/useLoginService';
 
 export default function LoginPage() {
@@ -9,6 +10,8 @@ export default function LoginPage() {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const history = useHistory();
 
   function getIsValidEmailByStr(str) {
     return /\S+@\S+\.\S+/.test(str);
@@ -38,13 +41,17 @@ export default function LoginPage() {
 
   async function handleOnClickLoginBtn() {
     setDoesUserExist(true);
+
     try {
       const response = await loginService({
         email,
         password,
       });
 
-      console.log(response);
+      console.log('Login response:', response);
+      localStorage.setItem('user', JSON.stringify(response.data.token));
+
+      history.push('/customer/products');
     } catch (e) {
       setDoesUserExist(false);
       console.log(e);
