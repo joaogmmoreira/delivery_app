@@ -1,6 +1,6 @@
+const crypto = require('crypto');
 const { User } = require('../database/models');
 const createToken = require('../utils/jwtConfig');
-const crypto = require('crypto');
 
 const login = async ({ email, password }) => {
   //  referencia https://stackoverflow.com/questions/5878682/node-js-hash-string
