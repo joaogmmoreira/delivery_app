@@ -37,7 +37,7 @@ export default function ProductCard({ product }) {
             Add
           </button>
 
-          <span>
+          <span data-testid={ `customer_products__input-card-quantity-${product.id}` }>
             {productQuantity}
           </span>
 
