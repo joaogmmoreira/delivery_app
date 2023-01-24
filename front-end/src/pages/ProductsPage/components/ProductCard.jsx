@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { capitalizeFirstLetter } from '../../../utils/strings';
 
 export default function ProductCard({ product }) {
   const [productQuantity, setProductQuantity] = useState(0);
@@ -16,8 +17,11 @@ export default function ProductCard({ product }) {
     <div>
       <section
         data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-        style={ { backgroundImage: product.url_image } }
       >
+        <img
+          src={ product.url_image }
+          alt={ `${capitalizeFirstLetter(product.name)} illustration.` }
+        />
         <p data-testid={ `customer_products__element-card-price-${product.id}` }>
           {product.price}
         </p>
