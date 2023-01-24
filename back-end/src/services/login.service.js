@@ -21,23 +21,22 @@ const login = async ({ email, password }) => {
 const registerUser = async (data) => {
   const { email, password, name } = data;
 
-  // const verifyUser = await User.findOne({ where: { email } });
+  const verifyUser = await User.findOne({ where: { email } });
 
-  // if (!verifyUser) {
-    const hash = crypto.createHash('md5').update(password).digest('hex');
+  if (verifyUser) {
+    return { type: 409, message: 'User already exists' };  
+  }
 
-    const registeredUser = await User.create({ name, email, password: hash, role: 'customer' });
+  const hash = crypto.createHash('md5').update(password).digest('hex');
 
-   
-    const { role } = registeredUser.dataValues;
-    
-    const token = createToken(registeredUser.dataValues);
+  const registeredUser = await User.create({ name, email, password: hash, role: 'customer' });
 
-    return { type: null, message: { name, email, role, token } };
-  // }
+  const { role } = registeredUser.dataValues;
+  
+  const token = createToken(registeredUser.dataValues);
 
-  // return { type: 400, message: 'User already exists' }
-}
+  return { type: null, message: { name, email, role, token } };
+};
 
 module.exports = {
   login,

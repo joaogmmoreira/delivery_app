@@ -17,10 +17,10 @@ const registerUser = async (req, res) => {
   const { type, message } = await loginService.registerUser(data);
 
   if (type) {
-    return res.status(type).json({ message })
+    return res.status(type).json({ message });
   }
   return res.status(201).json({ user: message });
-}
+};
 
 module.exports = {
   validateLogin,
