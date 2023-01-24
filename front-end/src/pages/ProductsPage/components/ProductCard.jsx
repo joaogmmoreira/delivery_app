@@ -10,7 +10,7 @@ export default function ProductCard({ product }) {
   }
 
   function handleOnClickRemoveProduct() {
-    setProductQuantity(((prevState) => prevState - 1));
+    setProductQuantity(((prevState) => ((prevState - 1) < 0 ? 0 : prevState - 1)));
   }
 
   return (
