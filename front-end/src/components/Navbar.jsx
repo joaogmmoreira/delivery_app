@@ -7,7 +7,7 @@ export default function Navbar() {
   return (
     <header>
       <Link
-        to="/customer/producs"
+        to="/customer/products"
         data-testid="customer_products__element-navbar-link-products"
       >
         PRODUTOS
