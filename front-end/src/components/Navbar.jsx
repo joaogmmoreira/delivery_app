@@ -4,6 +4,10 @@ export default function Navbar() {
   function handleOnClickLoggout() {
     localStorage.clear();
   }
+
+  const user = JSON.parse(localStorage.getItem('user'));
+  console.log(user);
+
   return (
     <header>
       <Link
@@ -23,7 +27,7 @@ export default function Navbar() {
       <span
         data-testid="customer_products__element-navbar-user-full-name"
       >
-        {localStorage.getItem('name')}
+        {user?.name}
       </span>
 
       <Link

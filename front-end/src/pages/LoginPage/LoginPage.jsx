@@ -41,18 +41,15 @@ export default function LoginPage() {
 
   async function handleOnClickLoginBtn() {
     setDoesUserExist(true);
+
     try {
       const response = await loginService({
         email,
         password,
       });
 
-      console.log(response);
-
-      localStorage.setItem('name', response.data.token.name);
-      localStorage.setItem('email', response.data.token.email);
-      localStorage.setItem('role', response.data.token.role);
-      localStorage.setItem('token', response.data.token.token);
+      console.log('Login response:', response);
+      localStorage.setItem('user', JSON.stringify(response.data.token));
 
       history.push('/customer/products');
     } catch (e) {
