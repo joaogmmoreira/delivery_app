@@ -11,10 +11,10 @@ const login = async ({ email, password }) => {
     return { type: 404, message: 'Invalid fields' };
   }
 
-  const { ...payload } = user.dataValues;
+  const { name, id, role } = user.dataValues;
 
-  const token = createToken(payload);
-  const { id, name, role } = payload;
+  const token = createToken(user);
+  
   return { type: null, message: { name, email, id, role, token } };
 };
 
