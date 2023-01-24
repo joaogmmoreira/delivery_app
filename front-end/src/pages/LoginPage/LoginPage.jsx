@@ -45,6 +45,11 @@ export default function LoginPage() {
       });
 
       console.log(response);
+
+      localStorage.setItem('name', response.data.token.name);
+      localStorage.setItem('email', response.data.token.email);
+      localStorage.setItem('role', response.data.token.role);
+      localStorage.setItem('token', response.data.token.token);
     } catch (e) {
       setDoesUserExist(false);
       console.log(e);
