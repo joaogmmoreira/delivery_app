@@ -1,6 +1,17 @@
 import PropTypes from 'prop-types';
+import { useState } from 'react';
 
 export default function ProductCard({ product }) {
+  const [productQuantity, setProductQuantity] = useState(0);
+
+  function handleOnClickAddProduct() {
+    setProductQuantity((prevState) => prevState + 1);
+  }
+
+  function handleOnClickRemoveProduct() {
+    setProductQuantity(((prevState) => prevState - 1));
+  }
+
   return (
     <div>
       <section
@@ -17,21 +28,27 @@ export default function ProductCard({ product }) {
           { product.name }
         </p>
 
-        <button
-          data-testid={ `customer_products__button-card-add-item-${product.id}` }
-          type="button"
-          onClick={ () => {} }
-        >
-          Add
-        </button>
+        <div>
+          <button
+            data-testid={ `customer_products__button-card-add-item-${product.id}` }
+            type="button"
+            onClick={ handleOnClickAddProduct }
+          >
+            Add
+          </button>
 
-        <button
-          data-testid={ `customer_products__button-card-rm-item-${product.id}` }
-          type="button"
-          onClick={ () => {} }
-        >
-          Remove
-        </button>
+          <span>
+            {productQuantity}
+          </span>
+
+          <button
+            data-testid={ `customer_products__button-card-rm-item-${product.id}` }
+            type="button"
+            onClick={ handleOnClickRemoveProduct }
+          >
+            Remove
+          </button>
+        </div>
       </section>
     </div>
   );
