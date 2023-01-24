@@ -19,7 +19,7 @@ export default function ProductCard({ product }) {
         data-testid={ `customer_products__img-card-bg-image-${product.id}` }
       >
         <img
-          src={ product.url_image }
+          src={ product.urlImage }
           alt={ `${capitalizeFirstLetter(product.name)} illustration.` }
         />
         <p data-testid={ `customer_products__element-card-price-${product.id}` }>
@@ -63,6 +63,6 @@ ProductCard.propTypes = {
     id: PropTypes.number,
     name: PropTypes.string,
     price: PropTypes.number,
-    url_image: PropTypes.string,
+    urlImage: PropTypes.string,
   }).isRequired,
 };
