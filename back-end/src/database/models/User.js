@@ -5,6 +5,7 @@ const UserModel = (sequelize, DataType) => {
       id: {
         type: DataType.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       name: DataType.STRING,
       email: DataType.STRING,

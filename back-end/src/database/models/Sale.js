@@ -5,6 +5,7 @@ const SaleModel = (sequelize, DataType) => {
       id: {
         type: DataType.INTEGER,
         primaryKey: true,
+        autoIncrement: true,
       },
       userId: DataType.INTEGER,
       sellerId: DataType.INTEGER,
