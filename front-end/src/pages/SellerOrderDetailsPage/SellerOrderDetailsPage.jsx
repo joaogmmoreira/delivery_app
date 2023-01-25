@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import getOneSaleDetails from '../../services/getOneSaleDetails';
+import getSaleProducts from '../../services/getSaleProducts';
 import updateOrderStatus from '../../services/updateOrderStatus';
+import SaleProductsTable from './components/SaleProductsTable';
 
 export default function SellerOrderDetailsPage() {
   const [sale, setSale] = useState({});
+  const [saleProducts, setSaleProducts] = useState([]);
   const [id, setId] = useState({});
   const [orderStatus, setOrderStatus] = useState('Pendente');
 
@@ -13,7 +16,9 @@ export default function SellerOrderDetailsPage() {
     setId(saleId);
     async function getSale() {
       const saleResult = await getOneSaleDetails(saleId);
+      const saleProductsResult = await getSaleProducts(saleId);
       setSale(saleResult.data.message);
+      setSaleProducts(saleProductsResult.data.message);
     }
     getSale();
   }, [orderStatus]);
@@ -23,15 +28,13 @@ export default function SellerOrderDetailsPage() {
   }, [sale]);
 
   const prepareOrder = async () => {
-    const update = await updateOrderStatus(id, 'Preparando');
+    await updateOrderStatus(id, 'Preparando');
     setOrderStatus('Preparando');
-    window.alert(update.data.message);
   };
 
   const deliveryOrder = async () => {
-    const update = await updateOrderStatus(id, 'Em Trânsito');
+    await updateOrderStatus(id, 'Em Trânsito');
     setOrderStatus('Em Trânsito');
-    window.alert(update.data.message);
   };
 
   return (
@@ -76,6 +79,12 @@ export default function SellerOrderDetailsPage() {
         ,
         {sale.deliveryNumber}
       </div>
+      {/* <div>
+        {saleProducts.map((s) => (
+          <h1 key={ s.products.name }>{s.products.name}</h1>
+        ))}
+      </div> */}
+      <SaleProductsTable saleProducts={ saleProducts } />
     </div>
   );
 }
