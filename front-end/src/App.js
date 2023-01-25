@@ -1,6 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import AdminPage from './pages/AdminPage/AdminPage';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
@@ -20,6 +21,7 @@ function App() {
         <Route exact path="/seller/orders" component={ SellerOrdersPage } />
         <Route exact path="/seller/orders/:id" component={ OrderDetailsPage } />
         {/* <Route path="*" component={ NotFound } /> */}
+        <Route exact path="/admin" component={ AdminPage } />
       </Switch>
     </div>
   );

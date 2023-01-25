@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 export default function Navbar() {
+  const history = useHistory();
   function handleOnClickLoggout() {
     localStorage.clear();
+    history.push('/login');
   }
 
   const user = JSON.parse(localStorage.getItem('user'));
@@ -30,13 +32,13 @@ export default function Navbar() {
         {user?.name}
       </span>
 
-      <Link
-        onClick={ () => handleOnClickLoggout() }
-        to="/login"
+      <button
+        onClick={ handleOnClickLoggout }
+        type="button"
         data-testid="customer_products__element-navbar-link-logout"
       >
-        SAIR
-      </Link>
+        Sair
+      </button>
     </header>
   );
 }

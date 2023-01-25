@@ -1,17 +1,32 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { capitalizeFirstLetter } from '../../../utils/strings';
 
 export default function ProductCard({ product }) {
-  const [productQuantity, setProductQuantity] = useState(0);
+  const [quantity, setQuantity] = useState(0);
+  const [priceFormatted, setPriceFormatted] = useState('');
 
   function handleOnClickAddProduct() {
-    setProductQuantity((prevState) => prevState + 1);
+    setQuantity((prevState) => prevState + 1);
   }
 
   function handleOnClickRemoveProduct() {
-    setProductQuantity(((prevState) => ((prevState - 1) < 0 ? 0 : prevState - 1)));
+    setQuantity(((prevState) => ((prevState - 1) < 0
+      ? 0
+      : prevState - 1)));
   }
+
+  function formatProductPriceOnProduceChanges() {
+    if (!product) return;
+
+    const productPriceFormatted = product.price.toString().replace('.', ',');
+    setPriceFormatted(productPriceFormatted);
+  }
+
+  useEffect(() => {
+    console.log(product);
+    formatProductPriceOnProduceChanges();
+  }, [product]);
 
   return (
     <div>
@@ -22,7 +37,7 @@ export default function ProductCard({ product }) {
           alt={ `${capitalizeFirstLetter(product.name)} illustration.` }
         />
         <p data-testid={ `customer_products__element-card-price-${product.id}` }>
-          {product.price}
+          {priceFormatted}
         </p>
       </section>
 
@@ -42,8 +57,8 @@ export default function ProductCard({ product }) {
 
           <input
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
-            value={ productQuantity }
-            onChange={ ({ target: { value } }) => setProductQuantity(value) }
+            value={ quantity }
+            onChange={ ({ target: { value } }) => setQuantity(Number(value)) }
           />
 
           <button
