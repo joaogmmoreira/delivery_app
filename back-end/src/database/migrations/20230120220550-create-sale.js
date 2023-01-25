@@ -46,6 +46,7 @@ module.exports = {
       saleDate: {
         type: Sequelize.DATE,
         allowNull: false,
+        // referencia https://stackoverflow.com/questions/40694689/set-defaultvalue-to-todays-date-in-a-sequelize-migration
         defaultValue: Sequelize.fn('NOW'),
         field: 'sale_date',
       },
