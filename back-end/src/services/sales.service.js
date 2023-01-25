@@ -1,7 +1,7 @@
 const { Sale, SaleProduct } = require('../database/models');
 
-const getAll = async () => {
-  const allSales = await Sale.findAll();
+const getAll = async (sellerId) => {
+  const allSales = await Sale.findAll({ where: { sellerId } });
   if (allSales) return { type: null, message: allSales };
   return { type: 404, message: 'No sales registered' };
 };
@@ -10,6 +10,12 @@ const getOne = async (id) => {
   const sale = await Sale.findOne({ where: { id } });
   if (sale) return { type: null, message: sale };
   return { type: 404, message: 'Sale not found' };
+};
+
+const getSaleProducts = async (saleId) => {
+  const allSales = await SaleProduct.findAll({ where: { saleId }, include: { all: true } });
+  if (allSales) return { type: null, message: allSales };
+  return { type: 404, message: 'No sales registered' };
 };
 
 const updateStatus = async (id, status) => {
@@ -53,4 +59,5 @@ module.exports = {
   getOne,
   updateStatus,
   createSale,
+  getSaleProducts,
 };
