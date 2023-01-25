@@ -7,6 +7,12 @@ export async function loginService(loginPayload) {
   return response;
 }
 
+export async function registerService(loginPayload) {
+  const URL = `${BASE_URL}/login/register`;
+  const response = await axios.post(URL, loginPayload);
+  return response;
+}
+
 export async function loginServiceFetch(loginPayload) {
   const URL = `${BASE_URL}/login`;
 
