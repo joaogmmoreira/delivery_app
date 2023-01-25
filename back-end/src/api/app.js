@@ -1,7 +1,7 @@
 const cors = require('cors');
 const express = require('express');
 const router = require('../routes');
-const imagesController = require('../controller/images.controller')
+// const imagesController = require('../controller/images.controller');
 
 const app = express();
 

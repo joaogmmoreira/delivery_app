@@ -1,15 +1,15 @@
-const path = require('path')
+const path = require('path');
 
-const getProductImgByImgName = (req, res, next ) => {
-  const { imgName } = req.params
+const getProductImgByImgName = (req, res, next) => {
+  const { imgName } = req.params;
   const options = {
     root: path.join(
       __dirname,
       '../images/public',
-      )
-  }
-  const fileName = imgName
-  res.sendFile(fileName, options, function (err) {
+      ),
+  };
+  const fileName = imgName;
+  res.sendFile(fileName, options, (err) => {
     if (err) {
       next(err);
   } else {
@@ -17,8 +17,8 @@ const getProductImgByImgName = (req, res, next ) => {
       next();
   }
   });
-}
+};
 
 module.exports = {
-  getProductImgByImgName
-}
+  getProductImgByImgName,
+};

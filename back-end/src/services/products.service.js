@@ -1,4 +1,4 @@
-const { img } = require('../../../__tests__/selectors/customer/products');
+// const { img } = require('../../../__tests__/selectors/customer/products');
 const { Product } = require('../database/models');
 
 const getAll = async () => {
