@@ -11,7 +11,10 @@ const SaleModel = (sequelize, DataType) => {
       totalPrice: DataType.DECIMAL,
       deliveryAddress: DataType.STRING,
       deliveryNumber: DataType.STRING,
-      saleDate: DataType.DATE,
+      saleDate:  {
+        type: DataType.DATE,
+        defaultValue: sequelize.fn('NOW')
+      },
       status: DataType.STRING,
     },
 
