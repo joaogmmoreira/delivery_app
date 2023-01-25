@@ -1,4 +1,4 @@
-const { Sale } = require('../database/models');
+const { Sale, SaleProduct } = require('../database/models');
 
 const getAll = async () => {
   const allSales = await Sale.findAll();
@@ -24,16 +24,26 @@ const updateStatus = async (id, status) => {
 
 const createSale = async (saleData) => {
   const { 
-    userId,
-    sellerId = 1,
-    totalPrice,
-    deliveryAddress,
-    deliveryNumber,
-    status = 'Entregue',
+    userId, sellerId = 1, totalPrice, deliveryAddress,
+    deliveryNumber, status = 'Preparando', products,
   } = saleData;
-  const sale = await Sale.create(
+
+  const sale = await (await Sale.create(
     { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status },
-  );
+  )).reload();
+  // referencia reload(): https://github.com/sequelize/sequelize/issues/9151
+
+  const saleId = sale.id;
+  const createSalesProducts = products.map(async (product) => {
+    await SaleProduct.create({
+      saleId,
+      productId: product.id,
+      quantity: product.quantity,
+    });
+  });
+
+  await Promise.all(createSalesProducts);
+
   if (sale) return { type: null, message: sale };
   return { type: 500, message: 'Internal Error' };
 };
