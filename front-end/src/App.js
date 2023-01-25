@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
+import SellerOrdersPage from './pages/SellerOrdersPage/SellerOrdersPage';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route exact path="/login" component={ LoginPage } />
         <Route exact path="/customer/products" component={ ProductsPage } />
         <Route exact path="/register" component={ RegisterPage } />
+        <Route exact path="/seller/orders" component={ SellerOrdersPage } />
+        {/* <Route path="*" component={ NotFound } /> */}
       </Switch>
     </div>
   );
