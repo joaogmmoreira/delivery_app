@@ -70,9 +70,9 @@ export default function LoginPage() {
       });
 
       console.log('Login response:', response);
-      localStorage.setItem('user', JSON.stringify(response.data.token));
+      localStorage.setItem('user', JSON.stringify(response.data.user));
 
-      redirectUserByRole(response.data.token.role);
+      redirectUserByRole(response.data.user.role);
     } catch (e) {
       setDoesUserExist(false);
       console.log(e);
