@@ -40,17 +40,17 @@ export default function LoginPage() {
   }, [isValidEmail, isValidPassword]);
 
   function redirectToManageWhenAdministrator(role) {
-    if (role === 'administrator') return;
+    if (role !== 'administrator') return;
     history.push('/admin/manage');
   }
 
   function redirectToOrdersWhenSeller(role) {
-    if (role === 'seller') return;
+    if (role !== 'seller') return;
     history.push('/seller/orders');
   }
 
   function redirectToProductsWhenCustomer(role) {
-    if (role === 'customer') return;
+    if (role !== 'customer') return;
     history.push('/customer/products');
   }
 
