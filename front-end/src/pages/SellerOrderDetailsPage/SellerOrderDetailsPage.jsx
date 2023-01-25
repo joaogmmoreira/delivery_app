@@ -67,6 +67,7 @@ export default function SellerOrderDetailsPage() {
       >
         SAIU PARA ENTREGA
       </button>
+      <SaleProductsTable saleProducts={ saleProducts } />
       <div data-testid="seller_order_details__element-order-total-price">
         Preço Total:
         {' '}
@@ -79,12 +80,6 @@ export default function SellerOrderDetailsPage() {
         ,
         {sale.deliveryNumber}
       </div>
-      {/* <div>
-        {saleProducts.map((s) => (
-          <h1 key={ s.products.name }>{s.products.name}</h1>
-        ))}
-      </div> */}
-      <SaleProductsTable saleProducts={ saleProducts } />
     </div>
   );
 }

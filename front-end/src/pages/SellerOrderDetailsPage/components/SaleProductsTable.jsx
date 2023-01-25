@@ -5,21 +5,11 @@ export default function SaleProductsTable({ saleProducts }) {
     <table>
       <thead>
         <tr>
-          <th>
-            Item
-          </th>
-          <th>
-            Descrição
-          </th>
-          <th>
-            Quantidade
-          </th>
-          <th>
-            Valor Unitário
-          </th>
-          <th>
-            Sub-total
-          </th>
+          <th> Item </th>
+          <th> Descrição </th>
+          <th> Quantidade </th>
+          <th> Valor Unitário </th>
+          <th> Sub-total </th>
         </tr>
       </thead>
       <tbody>
@@ -68,7 +58,5 @@ export default function SaleProductsTable({ saleProducts }) {
 }
 
 SaleProductsTable.propTypes = {
-  saleProducts: PropTypes.shape({
-    map: PropTypes.func,
-  }).isRequired,
+  saleProducts: PropTypes.shape([]).isRequired,
 };
