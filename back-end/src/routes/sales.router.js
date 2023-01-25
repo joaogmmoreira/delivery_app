@@ -9,3 +9,4 @@ router.patch('/:id', salesController.updateStatus);
 router.post('/', salesController.createSale);
 
 module.exports = router;
+ 
