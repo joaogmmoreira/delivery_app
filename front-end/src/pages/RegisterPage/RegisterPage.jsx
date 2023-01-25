@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+import { registerService } from '../../services/useLoginService';
 
 function RegisterPage() {
   const [name, setName] = useState('');
@@ -10,7 +12,9 @@ function RegisterPage() {
   const [isPasswordValid, setPasswordValid] = useState(false);
   const [isRegisterBtnDisabled, setIsRegisterBtnDisabled] = useState(true);
 
-  // const [emailExists, setEmailExist] = useState(true);
+  const [emailExists, setEmailExist] = useState(true);
+
+  const history = useHistory();
 
   const validateEmail = (emailString) => /\S+@\S+\.\S+/.test(emailString);
 
@@ -47,12 +51,26 @@ function RegisterPage() {
     setIsRegisterBtnDisabled(false);
   }, [isNameValid, isEmailValid, isPasswordValid]);
 
-  // const handleClickInvalid = () => {
-  //   // setEmailExist(true);
-  //   // if (email !== validateEmail(email)) {
-  //   //   return setEmailExist(false);
-  //   // }
-  // };
+  const handleClickInvalid = async () => {
+    try {
+      const response = await registerService({
+        name,
+        email,
+        password,
+      });
+
+      localStorage.setItem('user', JSON.stringify(response));
+
+      history.push('/customer/products');
+    } catch (e) {
+      console.log(e);
+    }
+
+    setEmailExist(true);
+    if (email !== validateEmail(email)) {
+      return setEmailExist(false);
+    }
+  };
 
   return (
     <main>
@@ -82,23 +100,23 @@ function RegisterPage() {
         type="button"
         data-testid="common_register__button-register"
         disabled={ isRegisterBtnDisabled }
-        onClick={ () => {} }
+        onClick={ handleClickInvalid }
       >
         Cadastrar
       </button>
 
-      {/* { !emailExists && (
+      { !emailExists && (
         <p
           data-testid="common_register__element-invalid_register"
         >
-          This email is invalid!
+          Register invalid!
         </p>
-      )} */}
-      <p
+      )}
+      {/* <p
         data-testid="common_register__element-invalid_register"
       >
         This email is invalid!
-      </p>
+      </p> */}
     </main>
   );
 }
