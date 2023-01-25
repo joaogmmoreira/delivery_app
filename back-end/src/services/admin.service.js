@@ -1,7 +1,7 @@
 const crypto = require('crypto');
 const { User } = require('../database/models');
 const createToken = require('../utils/jwtConfig');
-
+// fkjgjdf
 const registerNewUser = async (data) => {
   const { email, password, name, role } = data;
 
