@@ -39,6 +39,27 @@ export default function LoginPage() {
     setIsLoginBtnDisabled(false);
   }, [isValidEmail, isValidPassword]);
 
+  function redirectToManageWhenAdministrator(role) {
+    if (role !== 'administrator') return;
+    history.push('/admin/manage');
+  }
+
+  function redirectToOrdersWhenSeller(role) {
+    if (role !== 'seller') return;
+    history.push('/seller/orders');
+  }
+
+  function redirectToProductsWhenCustomer(role) {
+    if (role !== 'customer') return;
+    history.push('/customer/products');
+  }
+
+  function redirectUserByRole(role) {
+    redirectToManageWhenAdministrator(role);
+    redirectToOrdersWhenSeller(role);
+    redirectToProductsWhenCustomer(role);
+  }
+
   async function handleOnClickLoginBtn() {
     setDoesUserExist(true);
 
@@ -51,7 +72,7 @@ export default function LoginPage() {
       console.log('Login response:', response);
       localStorage.setItem('user', JSON.stringify(response.data.token));
 
-      history.push('/customer/products');
+      redirectUserByRole(response.data.token.role);
     } catch (e) {
       setDoesUserExist(false);
       console.log(e);
