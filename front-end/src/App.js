@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
+import OrderDetailsPage from './pages/SellerOrderDetailsPage/SellerOrderDetailsPage';
 import SellerOrdersPage from './pages/SellerOrdersPage/SellerOrdersPage';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Route exact path="/customer/products" component={ ProductsPage } />
         <Route exact path="/register" component={ RegisterPage } />
         <Route exact path="/seller/orders" component={ SellerOrdersPage } />
+        <Route exact path="/seller/orders/:id" component={ OrderDetailsPage } />
         {/* <Route path="*" component={ NotFound } /> */}
       </Switch>
     </div>
