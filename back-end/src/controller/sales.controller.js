@@ -22,6 +22,17 @@ const getOne = async (req, res) => {
   return res.status(type).json({ message });
 };
 
+const getSaleProducts = async (req, res) => {
+  const { id } = req.params;
+  const { type, message } = await salesService.getSaleProducts(id);
+
+  if (!type) {
+    return res.status(200).json({ message });
+  }
+
+  return res.status(type).json({ message });
+};
+
 const updateStatus = async (req, res) => {
   const { id } = req.params;
   const { status } = req.body;
@@ -55,4 +66,5 @@ module.exports = {
   getOne,
   updateStatus,
   createSale,
+  getSaleProducts,
 };

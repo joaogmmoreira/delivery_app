@@ -12,6 +12,12 @@ const getOne = async (id) => {
   return { type: 404, message: 'Sale not found' };
 };
 
+const getSaleProducts = async (saleId) => {
+  const allSales = await SaleProduct.findAll({ where: { saleId }, include: { all: true } });
+  if (allSales) return { type: null, message: allSales };
+  return { type: 404, message: 'No sales registered' };
+};
+
 const updateStatus = async (id, status) => {
   const sale = await Sale.update({ status }, { where: { id } });
   if (sale) { 
@@ -53,4 +59,5 @@ module.exports = {
   getOne,
   updateStatus,
   createSale,
+  getSaleProducts,
 };
