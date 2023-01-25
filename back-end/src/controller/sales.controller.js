@@ -38,8 +38,20 @@ const updateStatus = async (req, res) => {
   return res.status(type).json({ message });
 };
 
+const createSale = async (req, res) => {
+  const saleData = req.body;
+  const { type, message } = await salesService.createSale(saleData);
+
+  if (!type) {
+    return res.status(201).json({ message });
+  }
+
+  return res.status(type).json({ message });
+};
+
 module.exports = {
   getAll,
   getOne,
   updateStatus,
+  createSale,
 };

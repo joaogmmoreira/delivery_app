@@ -22,8 +22,25 @@ const updateStatus = async (id, status) => {
   return { type: 404, message: 'Sale not found' };
 };
 
+const createSale = async (saleData) => {
+  const { 
+    userId,
+    sellerId = 1,
+    totalPrice,
+    deliveryAddress,
+    deliveryNumber,
+    status = 'Entregue',
+  } = saleData;
+  const sale = await Sale.create(
+    { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, status },
+  );
+  if (sale) return { type: null, message: sale };
+  return { type: 500, message: 'Internal Error' };
+};
+
 module.exports = {
   getAll,
   getOne,
   updateStatus,
+  createSale,
 };
