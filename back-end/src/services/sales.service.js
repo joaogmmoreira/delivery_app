@@ -1,7 +1,7 @@
 const { Sale, SaleProduct } = require('../database/models');
 
-const getAll = async () => {
-  const allSales = await Sale.findAll();
+const getAll = async (sellerId) => {
+  const allSales = await Sale.findAll({ where: { sellerId } });
   if (allSales) return { type: null, message: allSales };
   return { type: 404, message: 'No sales registered' };
 };

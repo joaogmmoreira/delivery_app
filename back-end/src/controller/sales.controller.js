@@ -1,7 +1,8 @@
 const { salesService } = require('../services');
 
-const getAll = async (_req, res) => {
-  const { type, message } = await salesService.getAll();
+const getAllBySeller = async (req, res) => {
+  const { sellerId } = req.params;
+  const { type, message } = await salesService.getAll(sellerId);
 
   if (!type) {
     return res.status(200).json({ message });
@@ -50,7 +51,7 @@ const createSale = async (req, res) => {
 };
 
 module.exports = {
-  getAll,
+  getAllBySeller,
   getOne,
   updateStatus,
   createSale,
