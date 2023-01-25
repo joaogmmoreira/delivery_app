@@ -3,11 +3,12 @@ const { User } = require('../database/models');
 const createToken = require('../utils/jwtConfig');
 
 const registerNewUser = async (data) => {
-  const { email, password, name } = data;
+  const { email, password, name, role } = data;
 
-  const verifyUser = await User.findOne({ where: { email } });
+  const verifyEmailUser = await User.findOne({ where: { email } });
+  const verifyNameUser = await User.findOne({ where: { name } });
 
-  if (verifyUser) {
+  if (verifyEmailUser || verifyNameUser) {
     return { type: 409, message: 'User already exists' };
   }
 
@@ -19,8 +20,6 @@ const registerNewUser = async (data) => {
     password: hash,
     role,
   });
-  console.log('oi', registeredUser);
-  const { role } = registeredUser.dataValues;
 
   const token = createToken(registeredUser);
 
