@@ -15,11 +15,10 @@ export default function ProductCard({ product }) {
 
   return (
     <div>
-      <section
-        data-testid={ `customer_products__img-card-bg-image-${product.id}` }
-      >
+      <section>
         <img
           src={ product.urlImage }
+          data-testid={ `customer_products__img-card-bg-image-${product.id}` }
           alt={ `${capitalizeFirstLetter(product.name)} illustration.` }
         />
         <p data-testid={ `customer_products__element-card-price-${product.id}` }>
@@ -41,9 +40,11 @@ export default function ProductCard({ product }) {
             Add
           </button>
 
-          <span data-testid={ `customer_products__input-card-quantity-${product.id}` }>
-            {productQuantity}
-          </span>
+          <input
+            data-testid={ `customer_products__input-card-quantity-${product.id}` }
+            value={ productQuantity }
+            onChange={ ({ target: { value } }) => setProductQuantity(value) }
+          />
 
           <button
             data-testid={ `customer_products__button-card-rm-item-${product.id}` }
