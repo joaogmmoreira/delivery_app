@@ -8,6 +8,7 @@ import ProductsPage from './pages/ProductsPage/ProductsPage';
 import RegisterPage from './pages/RegisterPage/RegisterPage';
 import OrderDetailsPage from './pages/SellerOrderDetailsPage/SellerOrderDetailsPage';
 import SellerOrdersPage from './pages/SellerOrdersPage/SellerOrdersPage';
+import CustomerPage from './pages/CustomerPage/CustomerPage';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route exact path="/seller/orders/:id" component={ OrderDetailsPage } />
         {/* <Route path="*" component={ NotFound } /> */}
         <Route exact path="/admin/manage" component={ AdminPage } />
+        <Route exact path="/customer/orders" component={ CustomerPage } />
       </Switch>
     </div>
   );
