@@ -3,6 +3,8 @@ import { Route, Switch } from 'react-router-dom';
 import './App.css';
 import AdminPage from './pages/AdminPage/AdminPage';
 import CheckoutPage from './pages/CheckoutPage/CheckoutPage';
+import CustomerOrderDetailsPage
+  from './pages/CustomerOrderDetailsPage/CustomerOrderDetailsPage';
 import HomePage from './pages/HomePage/HomePage';
 import LoginPage from './pages/LoginPage/LoginPage';
 import ProductsPage from './pages/ProductsPage/ProductsPage';
@@ -23,6 +25,7 @@ function App() {
         {/* <Route path="*" component={ NotFound } /> */}
         <Route exact path="/admin/manage" component={ AdminPage } />
         <Route exact path="/customer/checkout" component={ CheckoutPage } />
+        <Route exact path="/customer/orders" component={ CustomerOrderDetailsPage } />
       </Switch>
     </div>
   );
