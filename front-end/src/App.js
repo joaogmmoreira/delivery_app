@@ -12,7 +12,6 @@ import SellerOrdersPage from './pages/SellerOrdersPage/SellerOrdersPage';
 function App() {
   return (
     <div className="App">
-
       <Switch>
         <Route exact path="/" component={ HomePage } />
         <Route exact path="/login" component={ LoginPage } />
@@ -21,7 +20,7 @@ function App() {
         <Route exact path="/seller/orders" component={ SellerOrdersPage } />
         <Route exact path="/seller/orders/:id" component={ OrderDetailsPage } />
         {/* <Route path="*" component={ NotFound } /> */}
-        <Route exact path="/admin" component={ AdminPage } />
+        <Route exact path="/admin/manage" component={ AdminPage } />
       </Switch>
     </div>
   );

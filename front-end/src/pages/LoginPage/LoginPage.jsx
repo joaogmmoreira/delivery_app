@@ -54,10 +54,16 @@ export default function LoginPage() {
     history.push('/customer/products');
   }
 
+  function redirectToAdminManagement(role) {
+    if (role !== 'customer') return;
+    history.push('/admin');
+  }
+
   function redirectUserByRole(role) {
     redirectToManageWhenAdministrator(role);
     redirectToOrdersWhenSeller(role);
     redirectToProductsWhenCustomer(role);
+    redirectToAdminManagement(role);
   }
 
   async function handleOnClickLoginBtn() {

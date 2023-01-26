@@ -19,7 +19,7 @@ const login = async ({ email, password }) => {
 };
 
 const registerUser = async (data) => {
-  const { email, password, name, role: rolle } = data;
+  const { email, password, name } = data;
 
   const verifyUser = await User.findOne({ where: { email } });
 
@@ -33,7 +33,7 @@ const registerUser = async (data) => {
     name,
     email,
     password: hash,
-    role: rolle,
+    role: 'customer',
   });
 
   const { role } = registeredUser.dataValues;

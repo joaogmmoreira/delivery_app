@@ -7,9 +7,9 @@ export async function loginService(loginPayload) {
   return response;
 }
 
-export async function registerService(loginPayload) {
+export async function registerService(registerPayload) {
   const URL = `${BASE_URL}/login/register`;
-  const response = await axios.post(URL, loginPayload);
+  const response = await axios.post(URL, registerPayload);
   return response;
 }
 
