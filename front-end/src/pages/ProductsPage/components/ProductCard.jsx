@@ -5,15 +5,48 @@ import { capitalizeFirstLetter } from '../../../utils/strings';
 export default function ProductCard({ product }) {
   const [quantity, setQuantity] = useState(0);
   const [priceFormatted, setPriceFormatted] = useState('');
+  const { id } = product;
 
   function handleOnClickAddProduct() {
     setQuantity((prevState) => prevState + 1);
+
+    const products = JSON.parse(localStorage.getItem('delivery_cart'));
+    const isProductInCart = products.some((p) => p.id === id);
+
+    if (isProductInCart) {
+      products.find((p, index) => {
+        if (p.id === id) products[index].quantity += 1;
+        return true;
+      });
+      localStorage.setItem('delivery_cart', JSON.stringify(products));
+    } else {
+      const productToAdd = product;
+      productToAdd.quantity = 1;
+      const newCart = JSON.stringify([...products, productToAdd]);
+      localStorage.setItem('delivery_cart', newCart);
+    }
   }
 
   function handleOnClickRemoveProduct() {
     setQuantity(((prevState) => ((prevState - 1) < 0
       ? 0
       : prevState - 1)));
+
+    const products = JSON.parse(localStorage.getItem('delivery_cart'));
+    const isProductInCart = products.some((p) => p.id === id);
+    console.log(isProductInCart);
+
+    if (isProductInCart) {
+      products.find((p, index) => {
+        if (p.id === id && products[index].quantity > 1) {
+          products[index].quantity -= 1;
+        } else {
+          products.splice(index, 1);
+        }
+        return true;
+      });
+      localStorage.setItem('delivery_cart', JSON.stringify(products));
+    }
   }
 
   function formatProductPriceOnProduceChanges() {
@@ -24,7 +57,6 @@ export default function ProductCard({ product }) {
   }
 
   useEffect(() => {
-    console.log(product);
     formatProductPriceOnProduceChanges();
   }, [product]);
 
@@ -78,7 +110,8 @@ ProductCard.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
+    productId: PropTypes.number,
     urlImage: PropTypes.string,
   }).isRequired,
 };

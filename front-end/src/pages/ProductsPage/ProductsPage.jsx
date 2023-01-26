@@ -12,11 +12,18 @@ export default function ProductsPage() {
     }
 
     getAllProducts();
+
+    const cart = JSON.parse(localStorage.getItem('delivery_cart'));
+    if (!cart) localStorage.setItem('delivery_cart', '[]');
   }, []);
 
   return (
     <section>
       <Navbar />
+      <div data-testid="customer_products__button-cart">
+        <span> Ver Carrinho: R$ </span>
+        <span data-testid="customer_products__checkout-bottom-value">0</span>
+      </div>
       <div>
         {
           products.map((product) => (
