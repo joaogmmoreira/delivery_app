@@ -19,13 +19,17 @@ export default function ProductCard({ product, setTotalPrice }) {
 
     if (isProductInCart) {
       products.find((p, index) => {
-        if (p.id === id) products[index].quantity += 1;
+        if (p.id === id) products[index].quantity += quantity;
         return true;
       });
       localStorage.setItem('delivery_cart', JSON.stringify(products));
     } else {
       const productToAdd = product;
-      productToAdd.quantity = 1;
+      if (quantity === 0) {
+        productToAdd.quantity += 1;
+      } else {
+        productToAdd.quantity = quantity;
+      }
       const newCart = JSON.stringify([...products, productToAdd]);
       localStorage.setItem('delivery_cart', newCart);
     }

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import getAllProductsService from '../../services/getAllProductsService';
 import ProductCard from './components/ProductCard';
 
 export default function ProductsPage() {
+  const history = useHistory();
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -19,15 +21,14 @@ export default function ProductsPage() {
     if (!cart) localStorage.setItem('delivery_cart', '[]');
   }, []);
 
-  // useMemo(() => {
-  //   setTest(totalPrice);
-  //   console.log(totalPrice);
-  // }, [totalPrice]);
-
   return (
     <section>
       <Navbar />
-      <div data-testid="customer_products__button-cart">
+      <button
+        data-testid="customer_products__button-cart"
+        type="button"
+        onClick={ () => history.push('/customer/checkout') }
+      >
         <span> Ver Carrinho: R$ </span>
         <span data-testid="customer_products__checkout-bottom-value">
           {' '}
@@ -36,7 +37,7 @@ export default function ProductsPage() {
           })}
           {' '}
         </span>
-      </div>
+      </button>
       <div>
         {
           products.map((product) => (
