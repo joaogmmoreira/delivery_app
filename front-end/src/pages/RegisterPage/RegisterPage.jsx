@@ -13,7 +13,7 @@ function RegisterPage() {
   const [isRegisterBtnDisabled, setIsRegisterBtnDisabled] = useState(true);
 
   const [emailExists, setEmailExist] = useState(true);
-  const [nameExists, setNAmeExists] = useState(true);
+  // const [nameExists, setNAmeExists] = useState(true);
 
   const history = useHistory();
 
@@ -68,10 +68,9 @@ function RegisterPage() {
     }
 
     setEmailExist(true);
-    if (email !== validateEmail(email) || name === name) {
+    if (email !== validateEmail(email) || name) {
       return setEmailExist(false);
     }
-    set
   };
 
   return (
