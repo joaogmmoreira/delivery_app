@@ -1,40 +1,41 @@
 import PropTypes from 'prop-types';
 
 export default function ProductDetailsRow({ product, index, hasRemoveBtn }) {
+  console.log(product);
   return (
     <div>
-      <div
+      <span
         data-testid={ `
         customer_checkout__element-order-table-item-number-${index}` }
       >
-        {index}
-      </div>
+        {index + 1}
+      </span>
 
-      <div
+      <span
         data-testid={ `customer_checkout__element-order-table-name-${index}` }
       >
         {product.name}
-      </div>
+      </span>
 
-      <div
+      <span
         data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
       >
         {product.quantity}
-      </div>
+      </span>
 
-      <div
+      <span
         data-testid={
           `customer_checkout__element-order-table-unit-price-${index}`
         }
       >
         {product.price}
-      </div>
+      </span>
 
-      <div
+      <span
         data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
       >
-        {Number(product.price) * Number(product.quantity)}
-      </div>
+        {product.price}
+      </span>
       {
         hasRemoveBtn && (
           <button
@@ -54,7 +55,7 @@ ProductDetailsRow.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
     urlImage: PropTypes.string,
     quantity: PropTypes.number,
   }).isRequired,
