@@ -2,14 +2,19 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { capitalizeFirstLetter } from '../../../utils/strings';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, setTotalPrice }) {
   const [quantity, setQuantity] = useState(0);
   const [priceFormatted, setPriceFormatted] = useState('');
   const { id } = product;
 
-  function handleOnClickAddProduct() {
-    setQuantity((prevState) => prevState + 1);
+  function getTotalPrice() {
+    const products = JSON.parse(localStorage.getItem('delivery_cart'));
+    return products.reduce((acc, cur) => ((cur.quantity * Number(cur.price)) + acc), 0);
+  }
 
+  function handleOnClickAddProduct() {
+    setTotalPrice(getTotalPrice());
+    setQuantity((prevState) => prevState + 1);
     const products = JSON.parse(localStorage.getItem('delivery_cart'));
     const isProductInCart = products.some((p) => p.id === id);
 
@@ -114,4 +119,5 @@ ProductCard.propTypes = {
     productId: PropTypes.number,
     urlImage: PropTypes.string,
   }).isRequired,
+  setTotalPrice: PropTypes.func.isRequired,
 };

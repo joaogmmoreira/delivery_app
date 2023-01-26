@@ -5,6 +5,8 @@ import ProductCard from './components/ProductCard';
 
 export default function ProductsPage() {
   const [products, setProducts] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+
   useEffect(() => {
     async function getAllProducts() {
       const response = await getAllProductsService();
@@ -17,12 +19,22 @@ export default function ProductsPage() {
     if (!cart) localStorage.setItem('delivery_cart', '[]');
   }, []);
 
+  console.log(totalPrice);
+
+  useEffect(() => {
+    console.log(totalPrice);
+  }, [totalPrice]);
+
   return (
     <section>
       <Navbar />
       <div data-testid="customer_products__button-cart">
         <span> Ver Carrinho: R$ </span>
-        <span data-testid="customer_products__checkout-bottom-value">0</span>
+        <span data-testid="customer_products__checkout-bottom-value">
+          {' '}
+          {totalPrice.toFixed(2)}
+          {' '}
+        </span>
       </div>
       <div>
         {
@@ -30,6 +42,7 @@ export default function ProductsPage() {
             <ProductCard
               key={ product.id }
               product={ product }
+              setTotalPrice={ setTotalPrice }
             />))
         }
       </div>
