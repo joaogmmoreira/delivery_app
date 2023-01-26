@@ -13,7 +13,6 @@ export default function ProductCard({ product, setTotalPrice }) {
   }
 
   function handleOnClickAddProduct() {
-    setTotalPrice(getTotalPrice());
     setQuantity((prevState) => prevState + 1);
     const products = JSON.parse(localStorage.getItem('delivery_cart'));
     const isProductInCart = products.some((p) => p.id === id);
@@ -30,6 +29,7 @@ export default function ProductCard({ product, setTotalPrice }) {
       const newCart = JSON.stringify([...products, productToAdd]);
       localStorage.setItem('delivery_cart', newCart);
     }
+    setTotalPrice(getTotalPrice());
   }
 
   function handleOnClickRemoveProduct() {
@@ -39,7 +39,6 @@ export default function ProductCard({ product, setTotalPrice }) {
 
     const products = JSON.parse(localStorage.getItem('delivery_cart'));
     const isProductInCart = products.some((p) => p.id === id);
-    console.log(isProductInCart);
 
     if (isProductInCart) {
       products.find((p, index) => {
@@ -52,6 +51,7 @@ export default function ProductCard({ product, setTotalPrice }) {
       });
       localStorage.setItem('delivery_cart', JSON.stringify(products));
     }
+    setTotalPrice(getTotalPrice());
   }
 
   function formatProductPriceOnProduceChanges() {

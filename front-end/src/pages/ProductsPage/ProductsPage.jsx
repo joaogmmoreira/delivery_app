@@ -19,11 +19,10 @@ export default function ProductsPage() {
     if (!cart) localStorage.setItem('delivery_cart', '[]');
   }, []);
 
-  console.log(totalPrice);
-
-  useEffect(() => {
-    console.log(totalPrice);
-  }, [totalPrice]);
+  // useMemo(() => {
+  //   setTest(totalPrice);
+  //   console.log(totalPrice);
+  // }, [totalPrice]);
 
   return (
     <section>
@@ -32,7 +31,9 @@ export default function ProductsPage() {
         <span> Ver Carrinho: R$ </span>
         <span data-testid="customer_products__checkout-bottom-value">
           {' '}
-          {totalPrice.toFixed(2)}
+          {totalPrice.toLocaleString('pt-br', {
+            style: 'decimal', minimumFractionDigits: 2, maxiumFractionDigits: 2,
+          })}
           {' '}
         </span>
       </div>
