@@ -2,9 +2,21 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { capitalizeFirstLetter } from '../../../utils/strings';
 
-export default function ProductCard({ product }) {
+export default function ProductCard({ product, cart, setCart }) {
   const [quantity, setQuantity] = useState(0);
   const [priceFormatted, setPriceFormatted] = useState('');
+
+  function editProductQuantity() {
+    const updateState = {
+      ...cart,
+      [product.name]: {
+        quantity,
+        price: product.price,
+      },
+    };
+    setCart(updateState);
+    console.log('updateState', updateState);
+  }
 
   function handleOnClickAddProduct() {
     setQuantity((prevState) => prevState + 1);
@@ -24,9 +36,12 @@ export default function ProductCard({ product }) {
   }
 
   useEffect(() => {
-    console.log(product);
     formatProductPriceOnProduceChanges();
   }, [product]);
+
+  useEffect(() => {
+    editProductQuantity();
+  }, [quantity]);
 
   return (
     <div>
@@ -58,7 +73,10 @@ export default function ProductCard({ product }) {
           <input
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
             value={ quantity }
-            onChange={ ({ target: { value } }) => setQuantity(Number(value)) }
+            onChange={ ({ target: { value } }) => {
+              setQuantity(Number(value));
+              product.quantity = Number(quantity);
+            } }
           />
 
           <button
@@ -75,10 +93,17 @@ export default function ProductCard({ product }) {
 }
 
 ProductCard.propTypes = {
+  cart: PropTypes.shape({
+    quantity: PropTypes.number,
+    price: PropTypes.number,
+  }).isRequired,
   product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    price: PropTypes.number,
+    price: PropTypes.string,
+    productId: PropTypes.number,
+    quantity: PropTypes.number,
     urlImage: PropTypes.string,
   }).isRequired,
+  setCart: PropTypes.func.isRequired,
 };
