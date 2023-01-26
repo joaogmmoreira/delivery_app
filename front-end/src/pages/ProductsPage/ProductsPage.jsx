@@ -32,7 +32,7 @@ export default function ProductsPage() {
         <span data-testid="customer_products__checkout-bottom-value">
           {' '}
           {totalPrice.toLocaleString('pt-br', {
-            style: 'decimal', minimumFractionDigits: 2, maxiumFractionDigits: 2,
+            style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2,
           })}
           {' '}
         </span>
