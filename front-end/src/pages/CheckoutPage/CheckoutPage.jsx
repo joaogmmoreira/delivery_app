@@ -12,8 +12,8 @@ export default function CheckoutPage() {
   const mockProducts = useProductsRowsMocks();
 
   useEffect(() => {
-    const productsFromLocalStorage = JSON
-      .parse(localStorage.getItem('delivery_cart'));
+    /*     const productsFromLocalStorage = JSON
+      .parse(localStorage.getItem('delivery_cart')); */
 
     setProducts(mockProducts);
   }, []);
