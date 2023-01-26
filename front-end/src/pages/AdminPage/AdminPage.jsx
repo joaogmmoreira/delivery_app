@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import adminService from '../../services/postAdminManagement';
 
 function AdminPage() {
@@ -15,6 +16,8 @@ function AdminPage() {
   const [emailExists, setEmailExist] = useState(true);
 
   const [adminRegisBtnDisable, setAdminRegisBtnDisable] = useState(true);
+
+  const history = useHistory();
 
   const validateEmail = (emailString) => /\S+@\S+\.\S+/.test(emailString);
 
@@ -70,6 +73,8 @@ function AdminPage() {
       });
 
       localStorage.setItem('user', JSON.stringify(response.data.user));
+
+      history.push('/admin/manage');
       console.log(response);
     } catch (e) {
       console.log(e);
