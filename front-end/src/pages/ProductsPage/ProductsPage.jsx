@@ -8,6 +8,21 @@ export default function ProductsPage() {
   const history = useHistory();
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [cart, setCart] = useState({});
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  function getTotalPrice() {
+    const values = Object.values(cart);
+    console.log('values', values);
+    const total = values
+      .reduce((acc, cur) => ((cur.quantity * Number(cur.price)) + acc), 0);
+    setTotalPrice(total);
+    if (total !== 0) {
+      setIsDisabled(false);
+    } else {
+      setIsDisabled(true);
+    }
+  }
 
   useEffect(() => {
     async function getAllProducts() {
@@ -17,9 +32,15 @@ export default function ProductsPage() {
 
     getAllProducts();
 
-    const cart = JSON.parse(localStorage.getItem('delivery_cart'));
-    if (!cart) localStorage.setItem('delivery_cart', '[]');
+    const verifyCart = JSON.parse(localStorage.getItem('delivery_cart'));
+    if (!verifyCart) localStorage.setItem('delivery_cart', '{}');
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('delivery_cart', JSON.stringify(cart));
+    console.log('>>>>>>', cart);
+    getTotalPrice();
+  }, [cart]);
 
   return (
     <section>
@@ -28,6 +49,7 @@ export default function ProductsPage() {
         data-testid="customer_products__button-cart"
         type="button"
         onClick={ () => history.push('/customer/checkout') }
+        disabled={ isDisabled }
       >
         <span> Ver Carrinho: R$ </span>
         <span data-testid="customer_products__checkout-bottom-value">
@@ -44,7 +66,8 @@ export default function ProductsPage() {
             <ProductCard
               key={ product.id }
               product={ product }
-              setTotalPrice={ setTotalPrice }
+              cart={ cart }
+              setCart={ setCart }
             />))
         }
       </div>

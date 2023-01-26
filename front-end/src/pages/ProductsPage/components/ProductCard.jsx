@@ -2,60 +2,30 @@ import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
 import { capitalizeFirstLetter } from '../../../utils/strings';
 
-export default function ProductCard({ product, setTotalPrice }) {
+export default function ProductCard({ product, cart, setCart }) {
   const [quantity, setQuantity] = useState(0);
   const [priceFormatted, setPriceFormatted] = useState('');
-  const { id } = product;
 
-  function getTotalPrice() {
-    const products = JSON.parse(localStorage.getItem('delivery_cart'));
-    return products.reduce((acc, cur) => ((cur.quantity * Number(cur.price)) + acc), 0);
+  function editProductQuantity() {
+    const updateState = {
+      ...cart,
+      [product.name]: {
+        quantity,
+        price: product.price,
+      },
+    };
+    setCart(updateState);
+    console.log('updateState', updateState);
   }
 
   function handleOnClickAddProduct() {
     setQuantity((prevState) => prevState + 1);
-    const products = JSON.parse(localStorage.getItem('delivery_cart'));
-    const isProductInCart = products.some((p) => p.id === id);
-
-    if (isProductInCart) {
-      products.find((p, index) => {
-        if (p.id === id) products[index].quantity += quantity;
-        return true;
-      });
-      localStorage.setItem('delivery_cart', JSON.stringify(products));
-    } else {
-      const productToAdd = product;
-      if (quantity === 0) {
-        productToAdd.quantity += 1;
-      } else {
-        productToAdd.quantity = quantity;
-      }
-      const newCart = JSON.stringify([...products, productToAdd]);
-      localStorage.setItem('delivery_cart', newCart);
-    }
-    setTotalPrice(getTotalPrice());
   }
 
   function handleOnClickRemoveProduct() {
     setQuantity(((prevState) => ((prevState - 1) < 0
       ? 0
       : prevState - 1)));
-
-    const products = JSON.parse(localStorage.getItem('delivery_cart'));
-    const isProductInCart = products.some((p) => p.id === id);
-
-    if (isProductInCart) {
-      products.find((p, index) => {
-        if (p.id === id && products[index].quantity > 1) {
-          products[index].quantity -= 1;
-        } else {
-          products.splice(index, 1);
-        }
-        return true;
-      });
-      localStorage.setItem('delivery_cart', JSON.stringify(products));
-    }
-    setTotalPrice(getTotalPrice());
   }
 
   function formatProductPriceOnProduceChanges() {
@@ -68,6 +38,10 @@ export default function ProductCard({ product, setTotalPrice }) {
   useEffect(() => {
     formatProductPriceOnProduceChanges();
   }, [product]);
+
+  useEffect(() => {
+    editProductQuantity();
+  }, [quantity]);
 
   return (
     <div>
@@ -99,7 +73,10 @@ export default function ProductCard({ product, setTotalPrice }) {
           <input
             data-testid={ `customer_products__input-card-quantity-${product.id}` }
             value={ quantity }
-            onChange={ ({ target: { value } }) => setQuantity(Number(value)) }
+            onChange={ ({ target: { value } }) => {
+              setQuantity(Number(value));
+              product.quantity = Number(quantity);
+            } }
           />
 
           <button
@@ -116,12 +93,17 @@ export default function ProductCard({ product, setTotalPrice }) {
 }
 
 ProductCard.propTypes = {
+  cart: PropTypes.shape({
+    quantity: PropTypes.number,
+    price: PropTypes.number,
+  }).isRequired,
   product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
     price: PropTypes.string,
     productId: PropTypes.number,
+    quantity: PropTypes.number,
     urlImage: PropTypes.string,
   }).isRequired,
-  setTotalPrice: PropTypes.func.isRequired,
+  setCart: PropTypes.func.isRequired,
 };
