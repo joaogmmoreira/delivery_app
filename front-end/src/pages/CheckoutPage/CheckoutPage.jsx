@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import CheckoutSellerSelect from './components/CheckoutSellerSelect';
-import ProductDetailsRow from './components/ProductDetailsRow';
-import useProductsRowsMocks from './useProductsRowsMocks';
+import ProductDetailsRow from '../../components/ProductDetailsRow';
+import useProductsRowsMocks from '../../mocks/useProductsRowsMocks';
 
 export default function CheckoutPage() {
   const [products, setProducts] = useState([]);
@@ -37,6 +37,7 @@ export default function CheckoutPage() {
                   product={ product }
                   index={ index }
                   hasRemoveBtn
+                  pageName="checkout"
                 />
               ))
             }
