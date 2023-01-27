@@ -1,12 +1,10 @@
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export default function ProductDetailsRow({
   product,
   index, hasRemoveBtn, pageName,
   reRenderFunc }) {
-  const [fixedIndex, setFixedIndex] = useState(1);
-
   const [shouldRender, setShouldRender] = useState(true);
 
   function handleOnClickRemoveProduct() {
@@ -94,4 +92,5 @@ ProductDetailsRow.propTypes = {
   index: PropTypes.number.isRequired,
   hasRemoveBtn: PropTypes.bool.isRequired,
   pageName: PropTypes.string.isRequired,
+  reRenderFunc: PropTypes.func.isRequired,
 };
