@@ -63,7 +63,7 @@ function AdminPage() {
     setAdminRegisBtnDisable(false);
   }, [isNameValid, isEmailValid, isPasswordValid, isSelectValid]);
 
-  const handleClickInvalidR = async () => {
+  const handleClickAdminRegister = async () => {
     const getToken = JSON.parse(localStorage.getItem('user'));
     try {
       const response = await adminService({
@@ -72,8 +72,6 @@ function AdminPage() {
         password,
         role,
       }, getToken.token);
-
-      localStorage.setItem('user', JSON.stringify(response.data.user));
 
       history.push('/admin/manage');
       console.log(response);
@@ -121,13 +119,13 @@ function AdminPage() {
         type="button"
         data-testid="admin_manage__button-register"
         disabled={ adminRegisBtnDisable }
-        onClick={ handleClickInvalidR }
+        onClick={ handleClickAdminRegister }
       >
         Cadastrar
       </button>
       { !errorMessage && (
         <p
-          data-testid="common_register__element-invalid_register"
+          data-testid="admin_manage__element-invalid-register"
         >
           Register invalid!
         </p>

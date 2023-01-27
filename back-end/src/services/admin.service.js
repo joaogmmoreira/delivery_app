@@ -9,27 +9,23 @@ const registerNewUser = async (data) => {
   const verifyNameUser = await User.findOne({ where: { name } });
 
   if (!verifyEmailUser || !verifyNameUser) {
-    
+
+    const hash = crypto.createHash('md5').update(password).digest('hex');
+    const obj = {
+      name,
+      email,
+      password: hash,
+      role,
+    };
+  
+    await User.create(obj);
+
+    const token = createToken(obj);
+  
+    return { type: null, message: { name, email, role, token } };
   }
   return { type: 409, message: 'User already exists' };
 
-  const hash = crypto.createHash('md5').update(password).digest('hex');
-
-  const registeredUser = await User.create({
-    name,
-    email,
-    password: hash,
-    role,
-  });
-  const obj = {
-    name,
-    email,
-    password: hash,
-    role,
-  };
-  const token = createToken(obj);
-
-  return { type: null, message: { name, email, role, token } };
 };
 
 module.exports = {
