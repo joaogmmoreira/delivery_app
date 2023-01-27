@@ -34,7 +34,7 @@ const registerUser = async (data) => {
 
   const { role } = registeredUser.dataValues;
 
-  const token = createToken(registeredUser);
+  const token = createToken(obj);
 
   return { type: null, message: { name, email, role, token } };
 };
