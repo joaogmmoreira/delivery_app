@@ -8,9 +8,10 @@ const registerNewUser = async (data) => {
   const verifyEmailUser = await User.findOne({ where: { email } });
   const verifyNameUser = await User.findOne({ where: { name } });
 
-  if (verifyEmailUser || verifyNameUser) {
-    return { type: 409, message: 'User already exists' };
+  if (!verifyEmailUser || !verifyNameUser) {
+    
   }
+  return { type: 409, message: 'User already exists' };
 
   const hash = crypto.createHash('md5').update(password).digest('hex');
 
@@ -20,8 +21,13 @@ const registerNewUser = async (data) => {
     password: hash,
     role,
   });
-
-  const token = createToken(registeredUser);
+  const obj = {
+    name,
+    email,
+    password: hash,
+    role,
+  };
+  const token = createToken(obj);
 
   return { type: null, message: { name, email, role, token } };
 };

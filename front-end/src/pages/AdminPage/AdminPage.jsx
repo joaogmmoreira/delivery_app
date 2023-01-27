@@ -13,7 +13,7 @@ function AdminPage() {
   const [isPasswordValid, setPasswordValid] = useState(false);
   const [isSelectValid, setSelectValid] = useState(false);
 
-  const [emailExists, setEmailExist] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(true);
 
   const [adminRegisBtnDisable, setAdminRegisBtnDisable] = useState(true);
 
@@ -64,25 +64,23 @@ function AdminPage() {
   }, [isNameValid, isEmailValid, isPasswordValid, isSelectValid]);
 
   const handleClickInvalidR = async () => {
+    const getToken = JSON.parse(localStorage.getItem('user'));
     try {
       const response = await adminService({
         name,
         email,
         password,
         role,
-      });
+      }, getToken.token);
 
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
       history.push('/admin/manage');
       console.log(response);
+      setErrorMessage(true);
     } catch (e) {
+      setErrorMessage(false);
       console.log(e);
-    }
-
-    setEmailExist(true);
-    if (email !== validateEmail(email)) {
-      return setEmailExist(false);
     }
   };
 
@@ -127,7 +125,7 @@ function AdminPage() {
       >
         Cadastrar
       </button>
-      { !emailExists && (
+      { !errorMessage && (
         <p
           data-testid="common_register__element-invalid_register"
         >

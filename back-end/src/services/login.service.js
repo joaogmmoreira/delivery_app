@@ -10,10 +10,10 @@ const login = async ({ email, password }) => {
   if (!user || user.password !== hash) {
     return { type: 404, message: 'Invalid fields' };
   }
-
   const { name, id, role } = user.dataValues;
+  const obj = { name, email, id, role };
 
-  const token = createToken(user);
+  const token = createToken(obj);
 
   return { type: null, message: { name, email, id, role, token } };
 };
@@ -27,14 +27,14 @@ const registerUser = async (data) => {
     return { type: 409, message: 'User already exists' };
   }
 
+  
   const hash = crypto.createHash('md5').update(password).digest('hex');
-
-  const registeredUser = await User.create({
-    name,
+  const obj = {name,
     email,
     password: hash,
-    role: 'customer',
-  });
+    role: 'customer', }
+
+  const registeredUser = await User.create(obj);
 
   const { role } = registeredUser.dataValues;
 
