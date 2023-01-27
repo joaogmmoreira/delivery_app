@@ -27,12 +27,8 @@ const registerUser = async (data) => {
     return { type: 409, message: 'User already exists' };
   }
 
-  
   const hash = crypto.createHash('md5').update(password).digest('hex');
-  const obj = {name,
-    email,
-    password: hash,
-    role: 'customer', }
+  const obj = { name, email, password: hash, role: 'customer' };
 
   const registeredUser = await User.create(obj);
 
