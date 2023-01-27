@@ -2,25 +2,40 @@ import { useEffect, useState } from 'react';
 import Navbar from '../../components/Navbar';
 import CheckoutSellerSelect from './components/CheckoutSellerSelect';
 import ProductDetailsRow from '../../components/ProductDetailsRow';
-import useProductsRowsMocks from '../../mocks/useProductsRowsMocks';
+/* import useProductsRowsMocks from '../../mocks/useProductsRowsMocks'; */
 
 export default function CheckoutPage() {
   const [products, setProducts] = useState([]);
   const [houseNumber, setHouseNumber] = useState('');
   const [address, setAddress] = useState('');
 
-  const mockProducts = useProductsRowsMocks();
+  /*   const mockProducts = useProductsRowsMocks(); */
+
+  function getProductsFromDeliveryCart() {
+    const productsFromLocalStorage = JSON
+      .parse(localStorage.getItem('delivery_cart'));
+
+    const productsEntries = Object.entries(productsFromLocalStorage);
+
+    const productsWithQuantity = productsEntries
+      .filter((product) => {
+        if (product[1].quantity > 0) return product;
+        return null;
+      });
+
+    /* const productsWithQuantity = productsEntries
+      .map((product) => {
+        if (product[1].quantity < 1) return;
+
+        return product;
+      }); */
+
+    setProducts(productsWithQuantity);
+  }
 
   useEffect(() => {
-    /*     const productsFromLocalStorage = JSON
-      .parse(localStorage.getItem('delivery_cart')); */
-
-    setProducts(mockProducts);
+    getProductsFromDeliveryCart();
   }, []);
-
-  useEffect(() => {
-    console.log(products);
-  }, [products]);
 
   return (
     <div>
@@ -33,11 +48,12 @@ export default function CheckoutPage() {
             {
               products.map((product, index) => (
                 <ProductDetailsRow
-                  key={ product.id }
+                  key={ `${product[1].quantity}-${index}-${product[0]}` }
                   product={ product }
                   index={ index }
                   hasRemoveBtn
                   pageName="checkout"
+                  reRenderFunc={ () => getProductsFromDeliveryCart() }
                 />
               ))
             }
