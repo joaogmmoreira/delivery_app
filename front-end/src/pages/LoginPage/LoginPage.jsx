@@ -69,7 +69,7 @@ export default function LoginPage() {
         password,
       });
 
-      console.log('Login response:', response);
+      // console.log('Login response:', response);
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
       redirectUserByRole(response.data.user.role);

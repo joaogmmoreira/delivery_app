@@ -6,16 +6,52 @@ export default function ProductCard({ product, cart, setCart }) {
   const [quantity, setQuantity] = useState(0);
   const [priceFormatted, setPriceFormatted] = useState('');
 
+  // function editProductQuantity() {
+  //   const updateState = {
+  //     ...cart,
+  //     [product.name]: {
+  //       quantity,
+  //       price: product.price,
+  //     },
+  //   };
+  //   setCart(updateState);
+  //   // console.log('updateState', updateState);
+  // }
+
+  // const updateState = {
+  //   name: product.name,
+  //   quantity,
+  //   price: product.price,
+  // };
+
   function editProductQuantity() {
-    const updateState = {
+    const storage = localStorage.getItem('cart');
+    const parseStorage = JSON.parse(storage);
+
+    if (parseStorage.length) {
+      console.log('dentro', parseStorage.length);
+      const storageCheck = parseStorage
+        .filter((element) => element.name !== product.name);
+      const updateState = [
+        ...storageCheck,
+        {
+          name: product.name,
+          quantity,
+          // price: priceFormatted,
+          price: product.price,
+        }];
+      return setCart(updateState);
+    }
+
+    const updateState = [
       ...cart,
-      [product.name]: {
+      {
+        name: product.name,
         quantity,
+        // price: priceFormatted,
         price: product.price,
-      },
-    };
-    setCart(updateState);
-    console.log('updateState', updateState);
+      }];
+    return setCart(updateState);
   }
 
   function handleOnClickAddProduct() {
@@ -42,6 +78,17 @@ export default function ProductCard({ product, cart, setCart }) {
   useEffect(() => {
     editProductQuantity();
   }, [quantity]);
+
+  // const setCartEmptyOnFirstLoad = () => {
+  //   const cart = localStorage.getItem('cart');
+  //   if (!cart) {
+
+  //   }
+  // };
+
+  useEffect(() => {
+    setCart([]);
+  }, []);
 
   return (
     <div>

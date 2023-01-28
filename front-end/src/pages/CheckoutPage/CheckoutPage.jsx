@@ -13,22 +13,19 @@ export default function CheckoutPage() {
 
   function getProductsFromDeliveryCart() {
     const productsFromLocalStorage = JSON
-      .parse(localStorage.getItem('delivery_cart'));
+      .parse(localStorage.getItem('cart'));
+
+    console.log(productsFromLocalStorage);
 
     const productsEntries = Object.entries(productsFromLocalStorage);
+
+    console.log(productsEntries);
 
     const productsWithQuantity = productsEntries
       .filter((product) => {
         if (product[1].quantity > 0) return product;
         return null;
       });
-
-    /* const productsWithQuantity = productsEntries
-      .map((product) => {
-        if (product[1].quantity < 1) return;
-
-        return product;
-      }); */
 
     setProducts(productsWithQuantity);
   }
@@ -43,21 +40,18 @@ export default function CheckoutPage() {
       <section data-testid="customer_checkout__element-order-total-price">
         <div>
           <h2>Finalizar pedido</h2>
-
-          <div>
-            {
-              products.map((product, index) => (
-                <ProductDetailsRow
-                  key={ `${product[1].quantity}-${index}-${product[0]}` }
-                  product={ product }
-                  index={ index }
-                  hasRemoveBtn
-                  pageName="checkout"
-                  reRenderFunc={ () => getProductsFromDeliveryCart() }
-                />
-              ))
-            }
-          </div>
+          {
+            products.map((product, index) => (
+              <ProductDetailsRow
+                key={ `${product[1].quantity}-${index}-${product[0]}` }
+                product={ product }
+                index={ index }
+                hasRemoveBtn
+                pageName="checkout"
+                reRenderFunc={ () => getProductsFromDeliveryCart() }
+              />
+            ))
+          }
 
           <h3>Total Price</h3>
         </div>

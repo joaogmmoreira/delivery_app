@@ -1,14 +1,16 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+// import { useState } from 'react';
 
 export default function ProductDetailsRow({
   product,
-  index, hasRemoveBtn, pageName,
+  index,
+  hasRemoveBtn,
+  // pageName,
   reRenderFunc }) {
-  const [shouldRender, setShouldRender] = useState(true);
+  // const [shouldRender, setShouldRender] = useState(true);
 
   function handleOnClickRemoveProduct() {
-    const deliveryCart = JSON.parse(localStorage.getItem('delivery_cart'));
+    const deliveryCart = JSON.parse(localStorage.getItem('cart'));
 
     const newDelivertCart = Object
       .entries(deliveryCart)
@@ -16,69 +18,66 @@ export default function ProductDetailsRow({
         if (p[0] === product[0]) return;
         return p;
       });
-    /* localStorage.setItem(('delivery_cart', JSON.stringify(newDelivertCart))); */
-    console.log(newDelivertCart);
 
     localStorage
-      .setItem('delivery_cart', JSON.stringify(Object.fromEntries(newDelivertCart)));
+      .setItem('cart', JSON.stringify(Object.fromEntries(newDelivertCart)));
 
     setShouldRender(false);
     reRenderFunc();
   }
 
-  return (
+  // customer_checkout__element-order-table-item-number
+
+  // return product[1].quantity > 0 && shouldRender && (
+  return product[1].quantity > 0 && (
     <div>
-      {product[1].quantity > 0 && shouldRender && (
-        <div>
-          <span
-            data-testid={ `
-        customer_${pageName}__element-order-table-item-number-${index}` }
-          >
-            {index + 1}
-          </span>
+      <div
+        data-testid={ `
+      customer_checkout__element-order-table-item-number-${index}` }
+      >
+        {index + 1}
+      </div>
 
-          <span
-            data-testid={ `customer_${pageName}__element-order-table-name-${index}` }
-          >
-            {product[0]}
-          </span>
+      <div
+        data-testid={ `customer_checkout__element-order-table-name-${index}` }
+      >
+        {product[1].name}
+      </div>
 
-          <span
-            data-testid={ `customer_${pageName}__element-order-table-quantity-${index}` }
-          >
-            {product[1].quantity}
-          </span>
+      <div
+        data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
+      >
+        {product[1].quantity}
+      </div>
 
-          <span
+      <div
+        data-testid={
+          `customer_checkout__element-order-table-unit-price-${index}`
+        }
+      >
+        {(product[1].price).toString().replace('.', ',')}
+      </div>
+
+      <div
+        data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
+      >
+        {(Number(product[1].price) * Number(product[1].quantity))
+          .toFixed(2).toString().replace('.', ',')}
+      </div>
+      {
+        hasRemoveBtn && (
+          <button
+            type="button"
+            onClick={ handleOnClickRemoveProduct }
             data-testid={
-              `customer_${pageName}__element-order-table-unit-price-${index}`
+              `customer_checkout__element-order-table-remove-${index}`
             }
           >
-            {(product[1].price).toString().replace('.', ',')}
-          </span>
-
-          <span
-            data-testid={ `customer_${pageName}__element-order-table-sub-total-${index}` }
-          >
-            {(Number(product[1].price) * Number(product[1].quantity))
-              .toFixed(2).toString().replace('.', ',')}
-          </span>
-          {
-            hasRemoveBtn && (
-              <button
-                type="button"
-                onClick={ handleOnClickRemoveProduct }
-                data-testid={
-                  `customer_${pageName}__element-order-table-remove-${index}`
-                }
-              >
-                Remover
-              </button>
-            )
-          }
-        </div>)}
-    </div>
-  );
+            Remover
+          </button>
+        )
+      }
+    </div>);
 }
 
 ProductDetailsRow.propTypes = {
@@ -91,6 +90,6 @@ ProductDetailsRow.propTypes = {
   }).isRequired,
   index: PropTypes.number.isRequired,
   hasRemoveBtn: PropTypes.bool.isRequired,
-  pageName: PropTypes.string.isRequired,
+  // pageName: PropTypes.string.isRequired,
   reRenderFunc: PropTypes.func.isRequired,
 };

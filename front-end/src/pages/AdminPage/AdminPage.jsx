@@ -75,7 +75,7 @@ function AdminPage() {
       localStorage.setItem('user', JSON.stringify(response.data.user));
 
       history.push('/admin/manage');
-      console.log(response);
+      // console.log(response);
     } catch (e) {
       console.log(e);
     }
