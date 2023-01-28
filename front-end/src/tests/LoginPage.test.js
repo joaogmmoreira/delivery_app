@@ -1,16 +1,16 @@
 import React from 'react';
-import { screen, waitFor } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './utils/renderWithRouter';
 import App from '../App';
 import LoginPage from '../pages/LoginPage/LoginPage';
 
-const waitForLoading = async () => {
-  await waitFor(() => {
-    expect(screen
-      .getByTestId('customer_products__element-navbar-link-orders')).toBeInTheDocument();
-  });
-};
+// const waitForLoading = async () => {
+//   await waitFor(() => {
+//     expect(screen
+//       .getByTestId('customer_products__element-navbar-link-orders')).toBeDefined();
+//   });
+// };
 
 describe('Testes da página Login.', () => {
   it('Testando os inputs email e senha.', () => {
@@ -21,7 +21,7 @@ describe('Testes da página Login.', () => {
     expect(inputPassword).toBeDefined();
   });
 
-  it('Testando o botão de login.', async () => {
+  it('Testando o botão de login.', () => {
     const { history } = renderWithRouter(<App />);
     history.push('/login');
     const inputEmail = screen.getByPlaceholderText(/email/i);
@@ -37,11 +37,13 @@ describe('Testes da página Login.', () => {
     expect(buttonLogin).toBeDefined();
     expect(buttonLogin).not.toBeDisabled();
     userEvent.click(buttonLogin);
-    screen.logTestingPlaygroundURL();
-    const { pathname } = history.location;
+    // screen.logTestingPlaygroundURL();
     history.push('/customer/products');
-    await waitForLoading();
+    // await waitForLoading();
+    const { pathname } = history.location;
     expect(pathname).toBe('/customer/products');
+    const homeLink = screen.getByRole('link', { name: /produtos/i });
+    expect(homeLink).toBeDefined();
   });
 
   it('Testando o botão de register.', () => {

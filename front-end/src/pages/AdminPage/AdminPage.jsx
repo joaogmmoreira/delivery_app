@@ -115,9 +115,9 @@ function AdminPage() {
         value={ role }
         onChange={ ({ target: { value } }) => setRole(value) }
       >
-        <option value="default">Default</option>
-        <option value="seller">Vendedor</option>
-        <option value="customer">Cliente</option>
+        <option data-testid="select-option" value="default">Default</option>
+        <option data-testid="select-option" value="seller">Vendedor</option>
+        <option data-testid="select-option" value="customer">Cliente</option>
       </select>
       <button
         type="button"
