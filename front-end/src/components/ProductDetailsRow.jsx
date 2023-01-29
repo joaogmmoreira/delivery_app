@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-// import { useState } from 'react';
+import { useState } from 'react';
 
 export default function ProductDetailsRow({
   product,
@@ -7,10 +7,11 @@ export default function ProductDetailsRow({
   hasRemoveBtn,
   // pageName,
   reRenderFunc }) {
-  // const [shouldRender, setShouldRender] = useState(true);
+  const [shouldRender, setShouldRender] = useState(true);
 
   function handleOnClickRemoveProduct() {
     const deliveryCart = JSON.parse(localStorage.getItem('cart'));
+    console.log('hi', deliveryCart);
 
     const newDelivertCart = Object
       .entries(deliveryCart)
@@ -22,7 +23,7 @@ export default function ProductDetailsRow({
     localStorage
       .setItem('cart', JSON.stringify(Object.fromEntries(newDelivertCart)));
 
-    setShouldRender(false);
+    setShouldRender(deliveryCart);
     reRenderFunc();
   }
 
@@ -32,20 +33,25 @@ export default function ProductDetailsRow({
   return product[1].quantity > 0 && (
     <div>
       <div
-        data-testid={ `
-      customer_checkout__element-order-table-item-number-${index}` }
+        data-testid={
+          `customer_checkout__element-order-table-item-number-${index}`
+        }
       >
         {index + 1}
       </div>
 
       <div
-        data-testid={ `customer_checkout__element-order-table-name-${index}` }
+        data-testid={
+          `customer_checkout__element-order-table-name-<index>-${index}`
+        }
       >
         {product[1].name}
       </div>
 
       <div
-        data-testid={ `customer_checkout__element-order-table-quantity-${index}` }
+        data-testid={
+          `customer_checkout__element-order-table-quantity-${index}`
+        }
       >
         {product[1].quantity}
       </div>
@@ -59,7 +65,9 @@ export default function ProductDetailsRow({
       </div>
 
       <div
-        data-testid={ `customer_checkout__element-order-table-sub-total-${index}` }
+        data-testid={
+          `customer_checkout__element-order-table-sub-total-${index}`
+        }
       >
         {(Number(product[1].price) * Number(product[1].quantity))
           .toFixed(2).toString().replace('.', ',')}
@@ -79,15 +87,9 @@ export default function ProductDetailsRow({
       }
     </div>);
 }
-
+// referencia PropTypes https://stackoverflow.com/questions/41771217/react-linter-airbnb-proptypes-array
 ProductDetailsRow.propTypes = {
-  product: PropTypes.shape({
-    id: PropTypes.number,
-    name: PropTypes.string,
-    price: PropTypes.string,
-    urlImage: PropTypes.string,
-    quantity: PropTypes.number,
-  }).isRequired,
+  product: PropTypes.arrayOf(Object).isRequired,
   index: PropTypes.number.isRequired,
   hasRemoveBtn: PropTypes.bool.isRequired,
   // pageName: PropTypes.string.isRequired,
