@@ -7,7 +7,7 @@ export default function ProductDetailsRow({
   hasRemoveBtn,
   // pageName,
   reRenderFunc }) {
-  const [shouldRender, setShouldRender] = useState(true);
+  const [, setShouldRender] = useState(true);
 
   function handleOnClickRemoveProduct() {
     const deliveryCart = JSON.parse(localStorage.getItem('cart'));
