@@ -13,7 +13,6 @@ function RegisterPage() {
   const [isRegisterBtnDisabled, setIsRegisterBtnDisabled] = useState(true);
 
   const [emailExists, setEmailExist] = useState(true);
-  // const [nameExists, setNAmeExists] = useState(true);
 
   const history = useHistory();
 
