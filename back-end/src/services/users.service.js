@@ -1,4 +1,4 @@
-const { User } = require('../database/models')
+const { User } = require('../database/models');
 
 const getUserById = async (id) => {
   const user = await User.findOne({
@@ -11,12 +11,12 @@ const getUserById = async (id) => {
 };
 
 const getAllUsers = async () => {
-  const allUsers = await User.findAll()
+  const allUsers = await User.findAll();
 
-  return { type: null, message: allUsers }
-}
+  return { type: null, message: allUsers };
+};
 
 module.exports = {
   getUserById,
-  getAllUsers
-}
+  getAllUsers,
+};

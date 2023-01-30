@@ -12,7 +12,6 @@ const getUserById = async (req, res) => {
 };
 
 const getAllUsers = async (req, res) => {
-  const { id } = req.params;
   const { type, message } = await usersService.getAllUsers();
 
   if (!type) {
@@ -24,5 +23,5 @@ const getAllUsers = async (req, res) => {
 
 module.exports = {
   getUserById,
-  getAllUsers
+  getAllUsers,
 };
