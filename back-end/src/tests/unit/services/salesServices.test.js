@@ -4,7 +4,7 @@ const { expect } = require("chai");
 const { Sale, SaleProduct } = require('../../../database/models');
 const salesService = require('../../../services/sales.service');
 
-const { salesModelOutput, oneSaleModelOutput, productsFromSale } = require("./mocks/salesMocks");
+const { salesModelOutput, oneSaleModelOutput, productsFromSale, updateSaleMessage, saleData, createSaleModelOutput } = require("./mocks/salesMocks");
 
 describe('Sale Service Tests', () => {
 
@@ -54,5 +54,46 @@ describe('Sale Service Tests', () => {
 
       expect(result).to.be.deep.equal({ type: 404, message: 'No sales registered' });
     });
+  });
+
+  describe('Edit Sales', () => {
+    it('Update status from a sale - success', async () => {
+      Sinon.stub(Sale, 'update').resolves(1);
+
+      const result = await salesService.updateStatus(1, "Entregue");
+
+      expect(result).to.be.deep.equal({type: null, message: updateSaleMessage});
+    });
+
+    it('Update status from a sale - fail', async () => {
+      Sinon.stub(Sale, 'update').resolves(null);
+
+      const result = await salesService.updateStatus(1, "Entregue");
+
+      expect(result).to.be.deep.equal({ type: 404, message: 'Sale not found' });
+    });
+  });
+
+  describe('Create Sales', () => {
+    // it('Create sale - success', async () => {
+    //   Sinon.stub(Sale, 'create').resolves(createSaleModelOutput);
+    //   Sinon.stub(SaleProduct, 'create').resolves(true);
+    //   Sinon.stub(SaleProduct, 'create').resolves(true);
+
+    //   const result = await salesService.createSale(saleData);
+
+    //   expect(result).to.be.deep.equal({type: null, message: createSaleModelOutput});
+    // });
+
+    // it('Create sale - fail', async () => {
+    //   Sinon.stub(Sale, 'create').resolves(false);
+    //   Sinon.stub(SaleProduct, 'create').resolves(true);
+
+    //   const result = await salesService.createSale(saleData);
+
+    //   expect(result).to.be.deep.equal({ type: 500, message: 'Internal Error' });
+    // });
+
+    // TypeError: (intermediate value).reload is not a function
   });
 });

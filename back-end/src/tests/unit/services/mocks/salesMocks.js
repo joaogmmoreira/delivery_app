@@ -93,8 +93,44 @@ const productsFromSale = [
   },
 ];
 
+const updateSaleMessage = '1 sale status updated successfully to: Entregue';
+
+const saleData = {
+  userId: 1,
+  sellerId: 1,
+  totalPrice: 10,
+  deliveryAddress: 'Rua da padaria',
+  deliveryNumber: 100,
+  products: [
+    {
+      id: 1,
+      quantity: 3,
+    },
+    {
+      id: 2,
+      quantity: 2,
+    },
+  ],
+};
+
+const createSaleModelOutput = {
+  id: 5,
+  userId: 1,
+  sellerId: 1,
+  totalPrice: '10',
+  deliveryAddress: 'Rua da padaria',
+  deliveryNumber: '100',
+  saleDate: '2023-01-25T16:41:39.000Z',
+  status: 'Preparando',
+  user_id: 1,
+  seller_id: 1,
+};
+
 module.exports = {
   salesModelOutput,
   oneSaleModelOutput,
   productsFromSale,
+  updateSaleMessage,
+  saleData,
+  createSaleModelOutput,
 };
