@@ -13,15 +13,13 @@ export default function ProductDetailsRow({
     const deliveryCart = JSON.parse(localStorage.getItem('cart'));
     console.log('hi', deliveryCart);
 
-    const newDelivertCart = Object
-      .entries(deliveryCart)
-      .filter((p) => {
-        if (p[0] === product[0]) return;
-        return p;
-      });
+    const newDelivertCart = deliveryCart.filter((p) => {
+      if (p.name === product.name) return;
+      return p;
+    });
 
     localStorage
-      .setItem('cart', JSON.stringify(Object.fromEntries(newDelivertCart)));
+      .setItem('cart', JSON.stringify(newDelivertCart));
 
     setShouldRender(deliveryCart);
     reRenderFunc();
@@ -30,7 +28,7 @@ export default function ProductDetailsRow({
   // customer_checkout__element-order-table-item-number
 
   // return product[1].quantity > 0 && shouldRender && (
-  return product[1].quantity > 0 && (
+  return product.quantity > 0 && (
     <div>
       <div
         data-testid={
@@ -45,7 +43,7 @@ export default function ProductDetailsRow({
           `customer_checkout__element-order-table-name-<index>-${index}`
         }
       >
-        {product[1].name}
+        {product.name}
       </div>
 
       <div
@@ -53,7 +51,7 @@ export default function ProductDetailsRow({
           `customer_checkout__element-order-table-quantity-${index}`
         }
       >
-        {product[1].quantity}
+        {product.quantity}
       </div>
 
       <div
@@ -61,7 +59,7 @@ export default function ProductDetailsRow({
           `customer_checkout__element-order-table-unit-price-${index}`
         }
       >
-        {(product[1].price.toFixed(2)).toString().replace('.', ',')}
+        {((product.price)).toString().replace('.', ',')}
       </div>
 
       <div
@@ -69,7 +67,7 @@ export default function ProductDetailsRow({
           `customer_checkout__element-order-table-sub-total-${index}`
         }
       >
-        {(Number(product[1].price) * Number(product[1].quantity))
+        {(Number(product.price) * Number(product.quantity))
           .toFixed(2).toString().replace('.', ',')}
       </div>
       {
