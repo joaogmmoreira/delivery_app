@@ -86,6 +86,21 @@ const customerOrdersModelOutput = [
   },
 ];
 
+// Admin
+const newUserObjInput = {
+  name: 'Silver Lanches',
+  email: 'teste@teste',
+  password: '$#zebirita#$', // 1c37466c159755ce1fa181bd247cb925
+  role: 'customer',
+};
+
+const newUserObjOutput = {
+  name: 'Silver Lanches',
+  email: 'teste@teste',
+  role: 'customer',
+  token,
+};
+
 module.exports = {
   loginModelOutput,
   token,
@@ -96,4 +111,6 @@ module.exports = {
   loginServiceRegisterUserReturn,
   userExistsError,
   customerOrdersModelOutput,
+  newUserObjInput,
+  newUserObjOutput,
 };
