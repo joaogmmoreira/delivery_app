@@ -61,7 +61,7 @@ export default function ProductDetailsRow({
           `customer_checkout__element-order-table-unit-price-${index}`
         }
       >
-        {(product[1].price).toString().replace('.', ',')}
+        {(product[1].price.toFixed(2)).toString().replace('.', ',')}
       </div>
 
       <div
