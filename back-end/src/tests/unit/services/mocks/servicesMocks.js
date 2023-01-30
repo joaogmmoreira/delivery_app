@@ -58,6 +58,34 @@ const loginServiceRegisterUserReturn = {
 
 const userExistsError = { type: 409, message: 'User already exists' };
 
+// Customer
+const customerOrdersModelOutput = [
+  {
+    id: 1,
+    userId: 1,
+    sellerId: 1,
+    totalPrice: '13',
+    deliveryAddress: 'rua de ca',
+    deliveryNumber: '2',
+    saleDate: '2023-01-25T16:02:39.000Z',
+    status: 'Preparando',
+    user_id: 1,
+    seller_id: 1,
+  },
+  {
+    id: 2,
+    userId: 1,
+    sellerId: 2,
+    totalPrice: '3232',
+    deliveryAddress: '2',
+    deliveryNumber: '3',
+    saleDate: '2023-01-25T16:06:38.000Z',
+    status: 'Em Trânsito',
+    user_id: 1,
+    seller_id: 2,
+  },
+];
+
 module.exports = {
   loginModelOutput,
   token,
@@ -67,4 +95,5 @@ module.exports = {
   createUserReturn,
   loginServiceRegisterUserReturn,
   userExistsError,
+  customerOrdersModelOutput,
 };
