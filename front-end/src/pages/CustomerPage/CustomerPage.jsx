@@ -29,7 +29,7 @@ export default function CustomerPage() {
 
   const renderCustomerOrders = () => orders.map((order) => {
     const { id, status, saleDate, totalPrice } = order;
-    console.log(order);
+    // console.log(order);
     return (
       <OrderCard
         key={ `${id + saleDate}` }

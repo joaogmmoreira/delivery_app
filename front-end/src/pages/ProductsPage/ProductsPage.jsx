@@ -8,16 +8,16 @@ export default function ProductsPage() {
   const history = useHistory();
   const [products, setProducts] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [cart, setCart] = useState({});
+  const [cart, setCart] = useState([]);
   const [isDisabled, setIsDisabled] = useState(true);
 
   function getTotalPrice() {
     const values = Object.values(cart);
-    console.log('values', values);
+    // console.log('values', values);
     const total = values
       .reduce((acc, cur) => ((cur.quantity * Number(cur.price)) + acc), 0);
     setTotalPrice(total);
-    if (total !== 0) {
+    if (total > 0) {
       setIsDisabled(false);
     } else {
       setIsDisabled(true);
@@ -32,13 +32,12 @@ export default function ProductsPage() {
 
     getAllProducts();
 
-    const verifyCart = JSON.parse(localStorage.getItem('delivery_cart'));
-    if (!verifyCart) localStorage.setItem('delivery_cart', '{}');
+    const verifyCart = JSON.parse(localStorage.getItem('cart'));
+    if (!verifyCart) localStorage.setItem('cart', '[]');
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('delivery_cart', JSON.stringify(cart));
-    console.log('>>>>>>', cart);
+    localStorage.setItem('cart', JSON.stringify(cart));
     getTotalPrice();
   }, [cart]);
 
