@@ -13,7 +13,7 @@ function AdminPage() {
   const [isPasswordValid, setPasswordValid] = useState(false);
   const [isSelectValid, setSelectValid] = useState(false);
 
-  const [emailExists, setEmailExist] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(true);
 
   const [adminRegisBtnDisable, setAdminRegisBtnDisable] = useState(true);
 
@@ -63,26 +63,22 @@ function AdminPage() {
     setAdminRegisBtnDisable(false);
   }, [isNameValid, isEmailValid, isPasswordValid, isSelectValid]);
 
-  const handleClickInvalidR = async () => {
+  const handleClickAdminRegister = async () => {
+    const getToken = JSON.parse(localStorage.getItem('user'));
     try {
       const response = await adminService({
         name,
         email,
         password,
         role,
-      });
-
-      localStorage.setItem('user', JSON.stringify(response.data.user));
+      }, getToken.token);
 
       history.push('/admin/manage');
       console.log(response);
+      setErrorMessage(true);
     } catch (e) {
+      setErrorMessage(false);
       console.log(e);
-    }
-
-    setEmailExist(true);
-    if (email !== validateEmail(email)) {
-      return setEmailExist(false);
     }
   };
 
@@ -115,21 +111,21 @@ function AdminPage() {
         value={ role }
         onChange={ ({ target: { value } }) => setRole(value) }
       >
-        <option value="default">Default</option>
-        <option value="seller">Vendedor</option>
-        <option value="customer">Cliente</option>
+        <option data-testid="select-option" value="default">Default</option>
+        <option data-testid="select-option" value="seller">Vendedor</option>
+        <option data-testid="select-option" value="customer">Cliente</option>
       </select>
       <button
         type="button"
         data-testid="admin_manage__button-register"
         disabled={ adminRegisBtnDisable }
-        onClick={ handleClickInvalidR }
+        onClick={ handleClickAdminRegister }
       >
         Cadastrar
       </button>
-      { !emailExists && (
+      { !errorMessage && (
         <p
-          data-testid="common_register__element-invalid_register"
+          data-testid="admin_manage__element-invalid-register"
         >
           Register invalid!
         </p>

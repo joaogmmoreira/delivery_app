@@ -8,7 +8,7 @@ export default function Navbar() {
   }
 
   const user = JSON.parse(localStorage.getItem('user'));
-  console.log(user);
+  // console.log(user);
 
   return (
     <header>
