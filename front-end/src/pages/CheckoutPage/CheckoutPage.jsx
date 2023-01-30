@@ -26,7 +26,6 @@ export default function CheckoutPage() {
         if (product.quantity > 0) return product;
         return null;
       });
-    console.log('blz', productsWithQuantity[1]);
     setProducts(productsWithQuantity);
   }
 
