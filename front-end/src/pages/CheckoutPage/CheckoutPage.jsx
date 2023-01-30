@@ -16,18 +16,13 @@ export default function CheckoutPage() {
     const productsFromLocalStorage = JSON
       .parse(localStorage.getItem('cart'));
 
-    console.log('ooi', productsFromLocalStorage);
-
     const productsEntries = Object.entries(productsFromLocalStorage);
-
-    console.log('hello', productsEntries[1]);
 
     const productsWithQuantity = productsEntries
       .filter((product) => {
         if (product[1].quantity > 0) return product;
         return null;
       });
-    console.log('blz', productsWithQuantity[1]);
     setProducts(productsWithQuantity);
   }
 
@@ -35,8 +30,6 @@ export default function CheckoutPage() {
     const dfg = products.map((product) => (
       product[1].quantity * Number(product[1].price)));
     const total = dfg.reduce((acc, cur) => cur + acc, 0);
-    console.log(dfg);
-    console.log(total.toFixed(2).toString().replace('.', ','));
     setTotalPrice(total
       .toFixed(2)
       .toString()
