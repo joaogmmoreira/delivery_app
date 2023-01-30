@@ -3,14 +3,12 @@ const sinonChai = require('sinon-chai');
 const chai = require('chai');
 const { expect } = require('chai');
 const controller = require('../../../controller');
-const { loginOutput } = require('./mocks/loginMocks');
 const { productsService } = require('../../../services');
-const { loginServiceReturn } = require('../services/mocks/servicesMocks');
 const { productsModelOutput } = require('../services/mocks/productsMock');
 
 chai.use(sinonChai);
 
-describe('Test Products endpoints', () => {
+describe('Products Controller Tests', () => {
   afterEach(sinon.restore);
 
   it('should return all products - success', async () => {
@@ -27,7 +25,7 @@ describe('Test Products endpoints', () => {
     expect(res.json).to.have.been.calledWithMatch({message: productsModelOutput});
   });
 
-  it('should return all products - success', async () => {
+  it('should return all products - fail', async () => {
     const req = {};
     const res = {};
 
@@ -37,7 +35,7 @@ describe('Test Products endpoints', () => {
 
     await controller.productsController.getAll(req, res);
 
-    expect(res.status).to.have.been.calledWith(200);
+    expect(res.status).to.have.been.calledWith(500);
     expect(res.json).to.have.been.calledWithMatch({message: 'tá zuado'});
   });
 });

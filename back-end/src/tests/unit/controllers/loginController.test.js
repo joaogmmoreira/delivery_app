@@ -9,7 +9,7 @@ const { loginServiceReturn } = require('../services/mocks/servicesMocks');
 
 chai.use(sinonChai);
 
-describe('Test Login endpoints', () => {
+describe('Login Controller Tests', () => {
   afterEach(sinon.restore);
 
   it('should login - success', async () => {
