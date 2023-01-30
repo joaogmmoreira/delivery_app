@@ -10,7 +10,7 @@ import LoginPage from '../pages/LoginPage/LoginPage';
 //     expect(screen
 //       .getByTestId('customer_products__element-navbar-link-orders')).toBeDefined();
 //   });
-// };
+// };;
 
 describe('Testes da página Login.', () => {
   it('Testando os inputs email e senha.', () => {
@@ -37,7 +37,6 @@ describe('Testes da página Login.', () => {
     expect(buttonLogin).toBeDefined();
     expect(buttonLogin).not.toBeDisabled();
     userEvent.click(buttonLogin);
-    // screen.logTestingPlaygroundURL();
     history.push('/customer/products');
     // await waitForLoading();
     const { pathname } = history.location;
