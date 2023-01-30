@@ -1,16 +1,18 @@
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-import CheckoutSellerSelect from './components/CheckoutSellerSelect';
 import ProductDetailsRow from '../../components/ProductDetailsRow';
 /* import useProductsRowsMocks from '../../mocks/useProductsRowsMocks'; */
 import addNewOrder from '../../services/addNewOrder';
+import getAllUsers from '../../services/getAllUsers';
 
 export default function CheckoutPage() {
   const [products, setProducts] = useState([]);
   const [deliveryNumber, setDeliveryNumber] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [totalPrice, setTotalPrice] = useState(0);
+  const [allSellers, setAllSellers] = useState([]);
+  const [sellerId, setSellerId] = useState(1);
 
   /*   const mockProducts = useProductsRowsMocks(); */
   const history = useHistory();
@@ -19,15 +21,9 @@ export default function CheckoutPage() {
     const productsFromLocalStorage = JSON
       .parse(localStorage.getItem('cart'));
 
-    console.log('ooi', productsFromLocalStorage);
-
-    const productsEntries = Object.entries(productsFromLocalStorage);
-
-    console.log('hello', productsEntries[1]);
-
-    const productsWithQuantity = productsEntries
+    const productsWithQuantity = productsFromLocalStorage
       .filter((product) => {
-        if (product[1].quantity > 0) return product;
+        if (product.quantity > 0) return product;
         return null;
       });
     console.log('blz', productsWithQuantity[1]);
@@ -35,10 +31,10 @@ export default function CheckoutPage() {
   }
 
   function getTotalPrice() {
-    const dfg = products.map((product) => (
-      product[1].quantity * Number(product[1].price)));
-    const total = dfg.reduce((acc, cur) => cur + acc, 0);
-    console.log(dfg);
+    const total = products.map((product) => (
+      product.quantity * Number(product.price)))
+      .reduce((acc, cur) => cur + acc, 0);
+
     console.log(total.toFixed(2).toString().replace('.', ','));
     setTotalPrice(total
       .toFixed(2)
@@ -56,18 +52,13 @@ export default function CheckoutPage() {
 
   async function postNewOrder() {
     const productToBeAdded = {
-      userId: 1,
-      sellerId: 1,
+      userId: JSON.parse(localStorage.getItem('user')).id,
+      sellerId,
       totalPrice: Number(totalPrice.replace(',', '.')),
       deliveryAddress,
       deliveryNumber: Number(deliveryNumber),
       status: 'Preparando',
-      products: [
-        {
-          id: 1,
-          quantity: 3,
-        },
-      ],
+      products: JSON.parse(localStorage.getItem('cart')),
     };
 
     console.log('Product to be added:', productToBeAdded);
@@ -82,6 +73,20 @@ export default function CheckoutPage() {
     postNewOrder();
   }
 
+  async function getAllSellers() {
+    const { data } = await getAllUsers();
+    const allUsers = data.message;
+    const allSellersFound = allUsers
+      .filter((user) => user.role === 'seller');
+
+    setAllSellers(allSellersFound);
+    console.log('all users here', allSellersFound);
+  }
+
+  useEffect(() => {
+    getAllSellers();
+  }, []);
+
   return (
     <div>
       <Navbar />
@@ -91,7 +96,7 @@ export default function CheckoutPage() {
         {
           products.map((product, index) => (
             <ProductDetailsRow
-              key={ `${product[1].quantity}-${index}-${product[0]}` }
+              key={ `${product.quantity}-${index}-${product}` }
               product={ product }
               index={ index }
               hasRemoveBtn
@@ -112,7 +117,16 @@ export default function CheckoutPage() {
         <h2>Detalhes e Endereço para Entrega</h2>
 
         <div>
-          <CheckoutSellerSelect />
+          <select
+            data-testid="customer_checkout__select-seller"
+            name="select"
+            value={ sellerId }
+            onChange={ ({ target: { value } }) => setSellerId(value) }
+          >
+            {allSellers.map((seller) => (
+              <option key={ seller.id } value={ seller.id }>{ seller.name }</option>
+            )) }
+          </select>
 
           <input
             data-testid="customer_checkout__input-address"
