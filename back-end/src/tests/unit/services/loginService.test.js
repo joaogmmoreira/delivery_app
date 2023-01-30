@@ -1,6 +1,6 @@
 const Sinon = require("sinon");
 const { User } = require('../../../database/models');
-const { loginModelOutput, token, loginServiceReturn, wrongLoginServiceReturn, registerUserReqBody, loginServiceRegisterUserReturn, createUserReturn, userExistsError } = require("./servicesMocks");
+const { loginModelOutput, token, loginServiceReturn, wrongLoginServiceReturn, registerUserReqBody, loginServiceRegisterUserReturn, createUserReturn, userExistsError } = require("./mocks/servicesMocks");
 const loginService = require('../../../services/login.service');
 const jwt = require('jsonwebtoken');
 const { expect } = require("chai");
