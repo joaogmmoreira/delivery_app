@@ -1,15 +1,22 @@
 const { User } = require('../database/models')
 
-const getAllUsers = async (id) => {
-  const allUsers = await User.findAll({
+const getUserById = async (id) => {
+  const user = await User.findOne({
     where: {
       id,
     },
   });
 
-  return { type: null, message: allUsers };
+  return { type: null, message: user };
 };
 
+const getAllUsers = async () => {
+  const allUsers = await User.findAll()
+
+  return { type: null, message: allUsers }
+}
+
 module.exports = {
+  getUserById,
   getAllUsers
 }
