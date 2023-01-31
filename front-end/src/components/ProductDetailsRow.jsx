@@ -11,8 +11,6 @@ export default function ProductDetailsRow({
 
   function handleOnClickRemoveProduct() {
     const deliveryCart = JSON.parse(localStorage.getItem('cart'));
-    console.log('hi', deliveryCart);
-
     const newDelivertCart = deliveryCart.filter((p) => {
       if (p.name === product.name) return;
       return p;

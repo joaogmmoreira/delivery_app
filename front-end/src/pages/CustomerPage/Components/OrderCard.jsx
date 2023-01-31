@@ -5,7 +5,9 @@ export default function OrderCard({ id, status, saleDate, totalPrice }) {
     <div>
       <p data-testid={ `customer_orders__element-order-id-${id}` }>{ id }</p>
       <p data-testid={ `customer_orders__element-delivery-status-${id}` }>{ status }</p>
-      <p data-testid={ `customer_orders__element-order-date-${id}` }>{ saleDate }</p>
+      <p data-testid={ `customer_orders__element-order-date-${id}` }>
+        { new Date(saleDate).toLocaleDateString('pt-br') }
+      </p>
       <p data-testid={ `customer_orders__element-card-price-${id}` }>{ totalPrice }</p>
     </div>
   );

@@ -12,7 +12,7 @@ export default function CheckoutPage() {
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [totalPrice, setTotalPrice] = useState('0');
   const [allSellers, setAllSellers] = useState([]);
-  const [sellerId, setSellerId] = useState(1);
+  const [sellerId, setSellerId] = useState(0);
 
   /*   const mockProducts = useProductsRowsMocks(); */
   const history = useHistory();
@@ -33,14 +33,11 @@ export default function CheckoutPage() {
     const total = products.map((product) => (
       product.quantity * Number(product.price)))
       .reduce((acc, cur) => cur + acc, 0);
-
-    console.log(total.toFixed(2).toString().replace('.', ','));
     setTotalPrice(total
       .toFixed(2)
       .toString()
       .replace('.', ','));
   }
-  console.log(Number(totalPrice.replace(',', '.')).toFixed(2));
 
   useEffect(() => {
     getProductsFromDeliveryCart();
@@ -65,7 +62,6 @@ export default function CheckoutPage() {
 
     const response = await addNewOrder(productToBeAdded);
 
-    console.log(response.data.message);
     history.push(`/customer/orders/${response.data.message.id}`);
   }
 
@@ -80,7 +76,7 @@ export default function CheckoutPage() {
       .filter((user) => user.role === 'seller');
 
     setAllSellers(allSellersFound);
-    console.log('all users here', allSellersFound);
+    console.log('all sellers here', allSellersFound);
   }
 
   useEffect(() => {
@@ -123,6 +119,9 @@ export default function CheckoutPage() {
             value={ sellerId }
             onChange={ ({ target: { value } }) => setSellerId(value) }
           >
+            <option value={ 0 } selected disabled>
+              Selecione a pessoa vendedora
+            </option>
             {allSellers.map((seller) => (
               <option key={ seller.id } value={ seller.id }>{ seller.name }</option>
             )) }
