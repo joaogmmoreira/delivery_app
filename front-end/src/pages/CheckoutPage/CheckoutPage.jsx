@@ -10,7 +10,7 @@ export default function CheckoutPage() {
   const [products, setProducts] = useState([]);
   const [deliveryNumber, setDeliveryNumber] = useState('');
   const [deliveryAddress, setDeliveryAddress] = useState('');
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalPrice, setTotalPrice] = useState('0');
   const [allSellers, setAllSellers] = useState([]);
   const [sellerId, setSellerId] = useState(1);
 
@@ -40,6 +40,7 @@ export default function CheckoutPage() {
       .toString()
       .replace('.', ','));
   }
+  console.log(Number(totalPrice.replace(',', '.')).toFixed(2));
 
   useEffect(() => {
     getProductsFromDeliveryCart();
@@ -53,10 +54,10 @@ export default function CheckoutPage() {
     const productToBeAdded = {
       userId: JSON.parse(localStorage.getItem('user')).id,
       sellerId,
-      totalPrice: Number(totalPrice.replace(',', '.')),
+      totalPrice: Number(totalPrice.replace(',', '.')).toFixed(2),
       deliveryAddress,
       deliveryNumber: Number(deliveryNumber),
-      status: 'Preparando',
+      status: 'Pendente',
       products: JSON.parse(localStorage.getItem('cart')),
     };
 
