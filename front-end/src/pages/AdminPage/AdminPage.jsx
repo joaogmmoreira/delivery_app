@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import adminService from '../../services/postAdminManagement';
+import RenderUserAdmin from './components/AdminPageUser';
 
 function AdminPage() {
   const [name, setName] = useState('');
@@ -16,6 +17,8 @@ function AdminPage() {
   const [errorMessage, setErrorMessage] = useState(true);
 
   const [adminRegisBtnDisable, setAdminRegisBtnDisable] = useState(true);
+
+  const [refresh, setRefresh] = useState(false);
 
   const history = useHistory();
 
@@ -64,6 +67,7 @@ function AdminPage() {
   }, [isNameValid, isEmailValid, isPasswordValid, isSelectValid]);
 
   const handleClickAdminRegister = async () => {
+    setRefresh(true);
     const getToken = JSON.parse(localStorage.getItem('user'));
     try {
       const response = await adminService({
@@ -80,6 +84,7 @@ function AdminPage() {
       setErrorMessage(false);
       console.log(e);
     }
+    setRefresh(false);
   };
 
   return (
@@ -130,6 +135,10 @@ function AdminPage() {
           Register invalid!
         </p>
       )}
+      <RenderUserAdmin
+        refresh={ refresh }
+        setRefresh={ setRefresh }
+      />
     </main>
   );
 }
