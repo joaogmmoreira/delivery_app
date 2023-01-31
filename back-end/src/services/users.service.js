@@ -18,10 +18,10 @@ const getAllUsers = async () => {
 
 const serviceDeleteById = async (id) => {
   const deleteUser = await User.findByPk(id);
-  await deleteUser.destroy()
+  await deleteUser.destroy();
 
-  return { type: null, message: deleteUser }
-}
+  return { type: null, message: deleteUser };
+};
 
 module.exports = {
   getUserById,

@@ -26,10 +26,10 @@ const deleteById = async (req, res) => {
   const { type, message } = await usersService.serviceDeleteById(id);
 
   if (type) {
-    res.status(404).json({ message })
+    res.status(404).json({ message });
   }
-  res.status(204).end()
-}
+  res.status(204).end();
+};
 
 module.exports = {
   getUserById,
