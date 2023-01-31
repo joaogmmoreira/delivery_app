@@ -39,7 +39,7 @@ export default function CustomerPage() {
         status={ status }
         saleDate={ saleDate }
         totalPrice={ totalPrice }
-        onClick={ history.push('/') }
+        onClick={ () => history.push('/') }
       />
     );
   });
