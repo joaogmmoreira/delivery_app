@@ -3,12 +3,43 @@ import PropTypes from 'prop-types';
 function UserCard({ index, name, email, role, id, deleteUser }) {
   return (
     <tr key={ index }>
-      <td>{ index }</td>
-      <td>{ name }</td>
-      <td>{ email }</td>
-      <td>{ role }</td>
+      <td
+        data-testid={
+          `admin_manage__element-user-table-item-number-${index}`
+        }
+      >
+        { index }
+
+      </td>
+      <td
+        data-testid={
+          `admin_manage__element-user-table-name-${index}`
+        }
+      >
+        { name }
+
+      </td>
+      <td
+        data-testid={
+          `admin_manage__element-user-table-email-${index}`
+        }
+      >
+        { email }
+
+      </td>
+      <td
+        data-testid={
+          `admin_manage__element-user-table-role-${index}`
+        }
+      >
+        { role }
+
+      </td>
       <td>
         <button
+          data-testid={
+            `admin_manage__element-user-table-remove-${index}`
+          }
           type="button"
           onClick={ () => deleteUser(id) }
         >
