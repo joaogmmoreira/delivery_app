@@ -65,7 +65,7 @@ export default function ProductDetailsRow({
           `customer_checkout__element-order-table-sub-total-${index}`
         }
       >
-        {(Number(product.price) * Number(product.quantity))
+        {(Number(product.price.replace(',', '.')) * Number(product.quantity))
           .toFixed(2).toString().replace('.', ',')}
       </div>
       {

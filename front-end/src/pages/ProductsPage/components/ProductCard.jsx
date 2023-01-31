@@ -51,6 +51,7 @@ export default function ProductCard({ product, cart, setCart }) {
         quantity,
         // price: priceFormatted,
         price: product.price,
+        id: product.id,
       }];
     return setCart(updateState);
   }
