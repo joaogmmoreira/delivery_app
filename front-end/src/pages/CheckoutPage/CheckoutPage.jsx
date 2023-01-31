@@ -1,40 +1,46 @@
 import { useEffect, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
-import CheckoutSellerSelect from './components/CheckoutSellerSelect';
 import ProductDetailsRow from '../../components/ProductDetailsRow';
 /* import useProductsRowsMocks from '../../mocks/useProductsRowsMocks'; */
+import addNewOrder from '../../services/addNewOrder';
+import getAllUsers from '../../services/getAllUsers';
 
 export default function CheckoutPage() {
   const [products, setProducts] = useState([]);
-  const [houseNumber, setHouseNumber] = useState('');
-  const [address, setAddress] = useState('');
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [deliveryNumber, setDeliveryNumber] = useState('');
+  const [deliveryAddress, setDeliveryAddress] = useState('');
+  const [totalPrice, setTotalPrice] = useState('0');
+  const [allSellers, setAllSellers] = useState([]);
+  const [sellerId, setSellerId] = useState(1);
 
   /*   const mockProducts = useProductsRowsMocks(); */
+  const history = useHistory();
 
   function getProductsFromDeliveryCart() {
     const productsFromLocalStorage = JSON
       .parse(localStorage.getItem('cart'));
 
-    const productsEntries = Object.entries(productsFromLocalStorage);
-
-    const productsWithQuantity = productsEntries
+    const productsWithQuantity = productsFromLocalStorage
       .filter((product) => {
-        if (product[1].quantity > 0) return product;
+        if (product.quantity > 0) return product;
         return null;
       });
     setProducts(productsWithQuantity);
   }
 
   function getTotalPrice() {
-    const dfg = products.map((product) => (
-      product[1].quantity * Number(product[1].price)));
-    const total = dfg.reduce((acc, cur) => cur + acc, 0);
+    const total = products.map((product) => (
+      product.quantity * Number(product.price)))
+      .reduce((acc, cur) => cur + acc, 0);
+
+    console.log(total.toFixed(2).toString().replace('.', ','));
     setTotalPrice(total
       .toFixed(2)
       .toString()
       .replace('.', ','));
   }
+  console.log(Number(totalPrice.replace(',', '.')).toFixed(2));
 
   useEffect(() => {
     getProductsFromDeliveryCart();
@@ -43,6 +49,43 @@ export default function CheckoutPage() {
   useEffect(() => {
     if (products !== 0) { getTotalPrice(); }
   }, [products]);
+
+  async function postNewOrder() {
+    const productToBeAdded = {
+      userId: JSON.parse(localStorage.getItem('user')).id,
+      sellerId,
+      totalPrice: Number(totalPrice.replace(',', '.')).toFixed(2),
+      deliveryAddress,
+      deliveryNumber: Number(deliveryNumber),
+      status: 'Pendente',
+      products: JSON.parse(localStorage.getItem('cart')),
+    };
+
+    console.log('Product to be added:', productToBeAdded);
+
+    const response = await addNewOrder(productToBeAdded);
+
+    console.log(response.data.message);
+    history.push(`/customer/orders/${response.data.message.id}`);
+  }
+
+  function handleOnClickSubmitOrder() {
+    postNewOrder();
+  }
+
+  async function getAllSellers() {
+    const { data } = await getAllUsers();
+    const allUsers = data.message;
+    const allSellersFound = allUsers
+      .filter((user) => user.role === 'seller');
+
+    setAllSellers(allSellersFound);
+    console.log('all users here', allSellersFound);
+  }
+
+  useEffect(() => {
+    getAllSellers();
+  }, []);
 
   return (
     <div>
@@ -53,7 +96,7 @@ export default function CheckoutPage() {
         {
           products.map((product, index) => (
             <ProductDetailsRow
-              key={ `${product[1].quantity}-${index}-${product[0]}` }
+              key={ `${product.quantity}-${index}-${product}` }
               product={ product }
               index={ index }
               hasRemoveBtn
@@ -67,29 +110,36 @@ export default function CheckoutPage() {
       </div>
       <span data-testid="customer_checkout__element-order-total-price">
         {' '}
-        {totalPrice.toLocaleString('pt-br', {
-          style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2,
-        })}
+        {totalPrice }
         {' '}
       </span>
       <div>
         <h2>Detalhes e Endereço para Entrega</h2>
 
         <div>
-          <CheckoutSellerSelect />
+          <select
+            data-testid="customer_checkout__select-seller"
+            name="select"
+            value={ sellerId }
+            onChange={ ({ target: { value } }) => setSellerId(value) }
+          >
+            {allSellers.map((seller) => (
+              <option key={ seller.id } value={ seller.id }>{ seller.name }</option>
+            )) }
+          </select>
 
           <input
             data-testid="customer_checkout__input-address"
-            value={ address }
-            onChange={ ({ target: { value } }) => setAddress(value) }
+            value={ deliveryAddress }
+            onChange={ ({ target: { value } }) => setDeliveryAddress(value) }
             type="text"
             placeholder="Travessa Terceira da Castanheira, Bairro Muruci"
           />
 
           <input
             data-testid="customer_checkout__input-address-number"
-            value={ houseNumber }
-            onChange={ ({ target: { value } }) => setHouseNumber(value) }
+            value={ deliveryNumber }
+            onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
             type="text"
             placeholder="198"
           />
@@ -98,7 +148,7 @@ export default function CheckoutPage() {
         <button
           data-testid="customer_checkout__button-submit-order"
           type="button"
-          onClick={ () => {} }
+          onClick={ handleOnClickSubmitOrder }
         >
           Finalizar pedido
         </button>

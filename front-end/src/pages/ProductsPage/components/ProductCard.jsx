@@ -39,6 +39,7 @@ export default function ProductCard({ product, cart, setCart }) {
           quantity,
           // price: priceFormatted,
           price: product.price,
+          id: product.id,
         }];
       return setCart(updateState);
     }
@@ -140,14 +141,11 @@ export default function ProductCard({ product, cart, setCart }) {
 }
 
 ProductCard.propTypes = {
-  cart: PropTypes.shape({
-    quantity: PropTypes.number,
-    price: PropTypes.number,
-  }).isRequired,
+  cart: PropTypes.arrayOf(Object).isRequired,
   product: PropTypes.shape({
     id: PropTypes.number,
     name: PropTypes.string,
-    price: PropTypes.string,
+    price: PropTypes.number,
     productId: PropTypes.number,
     quantity: PropTypes.number,
     urlImage: PropTypes.string,

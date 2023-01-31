@@ -31,7 +31,7 @@ const updateStatus = async (id, status) => {
 const createSale = async (saleData) => {
   const { 
     userId, sellerId = 1, totalPrice, deliveryAddress,
-    deliveryNumber, status = 'Preparando', products,
+    deliveryNumber, status = 'Pendente', products,
   } = saleData;
 
   const sale = await (await Sale.create(
