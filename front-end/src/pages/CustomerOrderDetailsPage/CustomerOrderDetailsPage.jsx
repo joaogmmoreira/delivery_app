@@ -17,21 +17,31 @@ export default function CustomerOrderDetailsPage() {
     async function getSale() {
       const allUsers = await getAllUsers();
       const saleProductsResult = await getSaleProducts(id);
-      const { status } = saleProductsResult.data.message[0].sales;
-      setSaleStatus(status);
-      const { sellerId } = saleProductsResult.data.message[0].sales;
-      const userName = allUsers.data.message.find((user) => user.id === sellerId).name;
-      setSellerName(userName);
-      setProducts(saleProductsResult.data.message);
+      const sales = saleProductsResult.data.message;
+      if (sales.length > 0) {
+        const { status } = sales[0].sales;
+        setSaleStatus(status);
+        const { sellerId } = sales[0].sales;
+        const userName = allUsers.data.message.find((user) => user.id === sellerId).name;
+        setSellerName(userName);
+        setProducts(sales);
+      }
     }
     getSale();
-    console.log(products);
-    console.log(id);
   }, []);
 
   async function handleClick() {
     await updateOrderStatus(id, 'Entregue');
     setSaleStatus('Entregue');
+  }
+
+  function getTotalPrice() {
+    if (products.length > 0) {
+      const totalPrice = products.reduce((acc, cur) => (
+        acc + (Number(cur.quantity) * Number(cur.products.price))
+      ), 0);
+      return totalPrice.toFixed(2).toString().replace('.', ',');
+    }
   }
 
   return (
@@ -70,6 +80,8 @@ export default function CustomerOrderDetailsPage() {
           <button
             type="button"
             onClick={ handleClick }
+            data-testid="customer_order_details__button-delivery-check"
+            disabled={ saleStatus !== 'Em Trânsito' }
           >
             MARCAR COMO ENTREGUE
           </button>
@@ -84,6 +96,12 @@ export default function CustomerOrderDetailsPage() {
               pageName="order_details"
             />
           ))}
+        </div>
+        <div>
+          <span>Total:</span>
+          <span data-testid="customer_order_details__element-order-total-price">
+            { getTotalPrice() }
+          </span>
         </div>
       </div>
     </div>
