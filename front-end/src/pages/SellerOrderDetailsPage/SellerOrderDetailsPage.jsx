@@ -8,6 +8,7 @@ import SaleProductsTable from './components/SaleProductsTable';
 const PREPARANDO = 'Preparando';
 const PENDENTE = 'Pendente';
 const EMTRANSITO = 'Em Trânsito';
+const ENTREGUE = 'Entregue';
 
 export default function SellerOrderDetailsPage() {
   const [sale, setSale] = useState({});
@@ -64,7 +65,7 @@ export default function SellerOrderDetailsPage() {
         type="button"
         onClick={ prepareOrder }
         data-testid="seller_order_details__button-preparing-check"
-        disabled={ orderStatus === PREPARANDO }
+        disabled={ orderStatus === PREPARANDO || orderStatus === ENTREGUE }
       >
         PREPARAR PEDIDO
       </button>
@@ -72,7 +73,11 @@ export default function SellerOrderDetailsPage() {
         type="button"
         onClick={ deliveryOrder }
         data-testid="seller_order_details__button-dispatch-check"
-        disabled={ orderStatus !== PREPARANDO || orderStatus === EMTRANSITO }
+        disabled={
+          orderStatus !== PREPARANDO
+          || orderStatus === EMTRANSITO
+          || orderStatus === ENTREGUE
+        }
       >
         SAIU PARA ENTREGA
       </button>
