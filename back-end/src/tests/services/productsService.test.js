@@ -1,8 +1,8 @@
 const Sinon = require("sinon");
 const { expect } = require("chai");
 
-const { Product } = require('../../../database/models');
-const productsService = require('../../../services/products.service');
+const { Product } = require('../../database/models');
+const productsService = require('../../services/products.service');
 
 const { productsModelOutput } = require("./mocks/productsMock");
 

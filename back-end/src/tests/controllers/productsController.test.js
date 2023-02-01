@@ -2,8 +2,8 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const chai = require('chai');
 const { expect } = require('chai');
-const controller = require('../../../controller');
-const { productsService } = require('../../../services');
+const controller = require('../../controller');
+const { productsService } = require('../../services');
 const { productsModelOutput } = require('../services/mocks/productsMock');
 
 chai.use(sinonChai);
