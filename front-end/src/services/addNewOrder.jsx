@@ -6,8 +6,6 @@ export default async function addNewOrder(newOrderPayload) {
 
   const user = JSON.parse(localStorage.getItem('user'));
   const { token } = user;
-  console.log('user', user);
-  console.log('token', token);
 
   const response = await axios.post(
     URL,

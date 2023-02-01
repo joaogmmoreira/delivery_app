@@ -11,8 +11,6 @@ export default function ProductDetailsRow({
 
   function handleOnClickRemoveProduct() {
     const deliveryCart = JSON.parse(localStorage.getItem('cart'));
-    console.log('hi', deliveryCart);
-
     const newDelivertCart = deliveryCart.filter((p) => {
       if (p.name === product.name) return;
       return p;
@@ -67,7 +65,7 @@ export default function ProductDetailsRow({
           `customer_checkout__element-order-table-sub-total-${index}`
         }
       >
-        {(Number(product.price) * Number(product.quantity))
+        {(Number(product.price.replace(',', '.')) * Number(product.quantity))
           .toFixed(2).toString().replace('.', ',')}
       </div>
       {

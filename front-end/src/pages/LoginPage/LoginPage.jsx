@@ -60,6 +60,18 @@ export default function LoginPage() {
     redirectToProductsWhenCustomer(role);
   }
 
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem('user'));
+    if (userData) {
+      const { role } = userData;
+      // if (role === 'customer') {
+      //   history.push('/customer/orders');
+      // } else {
+      redirectUserByRole(role);
+      // }
+    }
+  }, []);
+
   async function handleOnClickLoginBtn() {
     setDoesUserExist(true);
 

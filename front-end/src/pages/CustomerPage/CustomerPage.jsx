@@ -44,6 +44,7 @@ export default function CustomerPage() {
   return (
     <>
       <Navbar />
+      <h2>Meus Pedidos</h2>
       {
         orders ? renderCustomerOrders() : <h1>Loading...</h1>
       }

@@ -1,6 +1,6 @@
 import { Link, useHistory } from 'react-router-dom';
 
-export default function Navbar() {
+export default function NavbarsSeller() {
   const history = useHistory();
   function handleOnClickLoggout() {
     localStorage.clear();
@@ -12,17 +12,10 @@ export default function Navbar() {
   return (
     <header>
       <Link
-        to="/customer/products"
-        data-testid="customer_products__element-navbar-link-products"
-      >
-        PRODUTOS
-      </Link>
-
-      <Link
-        to="/customer/orders"
+        to="/seller/orders"
         data-testid="customer_products__element-navbar-link-orders"
       >
-        MEUS PEDIDOS
+        PEDIDOS
       </Link>
 
       <span

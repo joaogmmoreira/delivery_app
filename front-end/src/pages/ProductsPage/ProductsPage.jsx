@@ -13,7 +13,6 @@ export default function ProductsPage() {
 
   function getTotalPrice() {
     const values = Object.values(cart);
-    // console.log('values', values);
     const total = values
       .reduce((acc, cur) => ((cur.quantity * Number(cur.price)) + acc), 0);
     setTotalPrice(total);

@@ -1,14 +1,20 @@
 import { useEffect, useState } from 'react';
+import NavbarsSeller from '../../components/NavbarSeller';
 import getOneSaleDetails from '../../services/getOneSaleDetails';
 import getSaleProducts from '../../services/getSaleProducts';
 import updateOrderStatus from '../../services/updateOrderStatus';
 import SaleProductsTable from './components/SaleProductsTable';
 
+const PREPARANDO = 'Preparando';
+const PENDENTE = 'Pendente';
+const EMTRANSITO = 'Em Trânsito';
+const ENTREGUE = 'Entregue';
+
 export default function SellerOrderDetailsPage() {
   const [sale, setSale] = useState({});
   const [saleProducts, setSaleProducts] = useState([]);
   const [id, setId] = useState({});
-  const [orderStatus, setOrderStatus] = useState('Pendente');
+  const [orderStatus, setOrderStatus] = useState(PENDENTE);
 
   useEffect(() => {
     const urlArray = (window.location.href).split('/');
@@ -21,6 +27,7 @@ export default function SellerOrderDetailsPage() {
       setSaleProducts(saleProductsResult.data.message);
     }
     getSale();
+    console.log(orderStatus);
   }, [orderStatus]);
 
   useEffect(() => {
@@ -28,25 +35,26 @@ export default function SellerOrderDetailsPage() {
   }, [sale]);
 
   const prepareOrder = async () => {
-    await updateOrderStatus(id, 'Preparando');
-    setOrderStatus('Preparando');
+    await updateOrderStatus(id, PREPARANDO);
+    setOrderStatus(PREPARANDO);
   };
 
   const deliveryOrder = async () => {
-    await updateOrderStatus(id, 'Em Trânsito');
-    setOrderStatus('Em Trânsito');
+    await updateOrderStatus(id, EMTRANSITO);
+    setOrderStatus(EMTRANSITO);
   };
 
   return (
     <div>
-      details
+      <NavbarsSeller />
+      <h2>Detalhes do Pedido</h2>
       <div data-testid="seller_order_details__element-order-details-label-order-id">
         Pedido
         {' '}
         {sale.id}
       </div>
       <div data-testid="seller_order_details__element-order-details-label-order-date">
-        {sale.saleDate}
+        {new Date(sale.saleDate).toLocaleDateString('pt-br')}
       </div>
       <div
         data-testid="seller_order_details__element-order-details-label-delivery-status"
@@ -57,6 +65,7 @@ export default function SellerOrderDetailsPage() {
         type="button"
         onClick={ prepareOrder }
         data-testid="seller_order_details__button-preparing-check"
+        disabled={ orderStatus === PREPARANDO || orderStatus === ENTREGUE }
       >
         PREPARAR PEDIDO
       </button>
@@ -64,14 +73,21 @@ export default function SellerOrderDetailsPage() {
         type="button"
         onClick={ deliveryOrder }
         data-testid="seller_order_details__button-dispatch-check"
+        disabled={
+          orderStatus !== PREPARANDO
+          || orderStatus === EMTRANSITO
+          || orderStatus === ENTREGUE
+        }
       >
         SAIU PARA ENTREGA
       </button>
       <SaleProductsTable saleProducts={ saleProducts } />
-      <div data-testid="seller_order_details__element-order-total-price">
+      <span>
         Preço Total:
         {' '}
-        {sale.totalPrice}
+      </span>
+      <div data-testid="seller_order_details__element-order-total-price">
+        {String(sale.totalPrice).replace('.', ',')}
       </div>
       <div>
         Endereço:
