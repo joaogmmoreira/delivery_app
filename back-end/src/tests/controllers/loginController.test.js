@@ -2,9 +2,9 @@ const sinon = require('sinon');
 const sinonChai = require('sinon-chai');
 const chai = require('chai');
 const { expect } = require('chai');
-const controller = require('../../../controller');
+const controller = require('../../controller');
 const { loginOutput } = require('./mocks/loginMocks');
-const { loginService } = require('../../../services');
+const { loginService } = require('../../services');
 const { loginServiceReturn } = require('../services/mocks/servicesMocks');
 
 chai.use(sinonChai);

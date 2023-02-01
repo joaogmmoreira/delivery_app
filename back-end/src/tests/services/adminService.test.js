@@ -1,8 +1,8 @@
 const Sinon = require('sinon');
 const { expect } = require('chai');
 
-const { User } = require('../../../database/models');
-const adminService = require('../../../services/admin.service');
+const { User } = require('../../database/models');
+const adminService = require('../../services/admin.service');
 const jwt = require('jsonwebtoken');
 
 const {

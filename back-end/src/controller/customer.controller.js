@@ -8,7 +8,7 @@ const getAllCustomerOrders = async (req, res) => {
     return res.status(200).json({ message });
   }
 
-  res.status(200).json({ message });
+  res.status(type).json({ message });
 };
 
 module.exports = {
