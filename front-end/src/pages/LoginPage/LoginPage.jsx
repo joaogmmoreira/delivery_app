@@ -64,11 +64,11 @@ export default function LoginPage() {
     const userData = JSON.parse(localStorage.getItem('user'));
     if (userData) {
       const { role } = userData;
-      if (role === 'customer') {
-        history.push('/customer/orders');
-      } else {
-        redirectUserByRole(role);
-      }
+      // if (role === 'customer') {
+      //   history.push('/customer/orders');
+      // } else {
+      redirectUserByRole(role);
+      // }
     }
   }, []);
 

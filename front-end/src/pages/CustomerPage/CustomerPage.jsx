@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
 import Navbar from '../../components/Navbar';
 import getAllCustomerOrders from '../../services/getAllCustomerOrders';
 import OrderCard from './Components/OrderCard';
 
 export default function CustomerPage() {
   const [orders, setOrders] = useState([]);
-  const history = useHistory();
 
   const getUserId = () => {
     const user = localStorage.getItem('user');
@@ -39,7 +37,6 @@ export default function CustomerPage() {
         status={ status }
         saleDate={ saleDate }
         totalPrice={ totalPrice }
-        onClick={ () => history.push('/') }
       />
     );
   });
