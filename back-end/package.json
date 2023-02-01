@@ -13,8 +13,8 @@
     "start": "node .",
     "dev": "nodemon .",
     "test": "mocha src/tests/**/*$NAME*.test.js --exit",
-    "test:coverage": "nyc --all npm run test",
-    "test:coverage:json": "nyc --all --reporter=json-summary npm run test",
+    "test:coverage": "nyc --all -x src/database/seeders -x src/database/migrations npm run test",
+    "test:coverage:json": "nyc --all -x src/database/seeders -x src/database/migrations --reporter=json-summary npm run test",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json ."
   },
   "dependencies": {
