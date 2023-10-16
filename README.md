@@ -14,9 +14,7 @@ Contribuição
 Sinta-se à vontade para contribuir. Crie solicitações de pull ou relate problemas.
 
 Autores
-- João Moreira
-  jgmoreira1809@gmail.com
-  [Seu Perfil do GitHub](https://github.com/joaogmmoreira)
+- João Moreira (https://github.com/joaogmmoreira)
 
 - Erik Yamamoto
   [erik-ymmt](https://github.com/erik-ymmt)
