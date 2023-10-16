@@ -20,14 +20,14 @@ Autores
 - Erik Yamamoto
   [erik-ymmt](https://github.com/erik-ymmt)
 
-- Victor Yuri Tavares de Camargo
-  [VictorYuriTC](https://github.com/VictorYuriTC)
-
 - João Gustavo
   [João Gustavo](https://github.com/Joaogustavo789)
 
 - Silvério Moraes
   [Silverio Moraes](https://github.com/SilverioMoraes)
+
+- Victor Yuri Tavares de Camargo
+  [VictorYuriTC](https://github.com/VictorYuriTC)
 
 
 
