@@ -32,7 +32,10 @@ Here are the steps to install and run both the frontend and backend of this proj
    2. **Navigate to the backend directory**
 
       Use the following command to navigate into the backend directory:
-      `cd back-end`
+
+      ```bash
+      cd back-end
+      ```
 
    3. **Install Node.js**
 
@@ -41,7 +44,10 @@ Here are the steps to install and run both the frontend and backend of this proj
    4. **Install the dependencies**
 
       The project dependencies are listed in the package.json file. You can install these dependencies using the following command:
-      `npm install`
+
+      ```bash
+      npm install
+      ```
 
    5. **Set up the environment variables**
 
@@ -50,14 +56,25 @@ Here are the steps to install and run both the frontend and backend of this proj
    6. **Reset the database**
 
       This project uses Sequelize for database management. You can reset the database using the following command:
-      `npm run db:reset`
+
+      ````bash
+      npm run db:reset```
+
+      ````
 
    7. **Start the server**
 
       Finally, you can start the server using the following command:
-      `npm start`
+
+      ```bash
+      npm start
+      ```
+
       For development purposes, you can use the following command to start the server with nodemon:
-      `npm run dev`
+
+      ```bash
+      npm run dev
+      ```
 
       This will start the server and automatically restart it whenever you make changes to the code.
 
