@@ -48,9 +48,9 @@ Here are the steps to install and run both the frontend and backend of this proj
       For development purposes, you can use the following command to start the server with nodemon:
       `npm run dev`
 
-   This will start the server and automatically restart it whenever you make changes to the code.
+      This will start the server and automatically restart it whenever you make changes to the code.
 
-2. Frontend
+2. **Frontend**
    1. Navigate to the frontend directory: Use the following command to navigate into the frontend directory:
       `cd front-end`
       cd <frontend-directory>
