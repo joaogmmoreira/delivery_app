@@ -25,20 +25,22 @@ Here are the steps to install and run both the frontend and backend of this proj
       First, you need to clone the repository to your local machine. You can do this using the following command in your terminal:
       `git clone https://github.com/joaogmmoreira/delivery_app.git`
 
-   1. **Navigate to the backend directory**
+   2. **Navigate to the backend directory**
       Use the following command to navigate into the backend directory:
       `cd back-end`
 
-   1. **Install Node.js**
+   3. **Install Node.js**
       This project requires Node.js version 16.0.0 or higher. If you don't have Node.js installed, you can download it from the official Node.js website.
 
-   1. **Install the dependencies**
+   4. **Install the dependencies**
       The project dependencies are listed in the package.json file. You can install these dependencies using the following command:
       `npm install`
 
-Set up the environment variables: This project uses environment variables stored in a .env file. You need to create this file in the root directory of the project and define the necessary variables. Refer to the .env.example file in the project to know which environment variables are needed.
+   5. **Set up the environment variables**
+      This project uses environment variables stored in a `.env` file. You need to create this file in the root directory of the project and define the necessary variables. Refer to the `.env.example` file in the project to know which environment variables are needed.
 
-Reset the database: This project uses Sequelize for database management. You can reset the database using the following command:
+   6. **Reset the database**
+      This project uses Sequelize for database management. You can reset the database using the following command:
 
 Start the server: Finally, you can start the server using the following command:
 For development purposes, you can use the following command to start the server with nodemon:
