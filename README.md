@@ -106,13 +106,13 @@ Here are the steps to install and run both the frontend and backend of this proj
 
    3. **Start the application**
 
-   Finally, you can start the application using the following command:
+      Finally, you can start the application using the following command:
 
-   ```bash
-   npm start
-   ```
+      ```bash
+      npm start
+      ```
 
-   This will start the application and open it in your default web browser.
+      This will start the application and open it in your default web browser.
 
 ## Usage
 
