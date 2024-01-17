@@ -107,24 +107,24 @@ Here are the steps to install and run both the frontend and backend of this proj
 
 ## Usage
 
-Once you have the project running, you can use it as follows:
+Once both the server and the application are running, you can access the application in your web browser at http://localhost:3000 (or whatever port you have configured).
 
-1. **Login**
-   Open your web browser and navigate to `http://localhost:3000`. You should see a login page. Enter your name and email to login.
+The application includes several pages, each with its own route:
 
-2. **Browse Recipes**
-   After logging in, you'll be taken to the recipes page. Here you can browse through a list of food or drink recipes.
+1. **Home Page** (/index): The landing page of the application where users are introduced to the platform.
+2. **Login Page** (/login): A page for users to log into their accounts.
+3. **Products Page** (/customer/products): A page where customers can view the list of products available for purchase.
+4. **Register Page** (/register): A page for new users to create an account.
+5. **Seller Orders Page** (/seller/orders): A page where sellers can view all their orders.
+6. **Order Details Page** (/seller/orders/:id): A page where sellers can view the details of a specific order.
+7. **Admin Page** (/admin/manage): A page where admins can manage the platform.
+8. **Checkout Page** (/customer/checkout): A page where customers can finalize their purchases and proceed to payment.
+9. **Customer Order Details Page** (/customer/orders/:id): A page where customers can view the details of a specific order.
+10. **Customer Page** (/customer/orders): A page where customers can view all their orders.
 
-3. **View Recipe Details**
-   Click on a recipe to view its details. This includes the ingredients, instructions, and a video tutorial.
+You can navigate to these pages by appending the route to the base URL. For example, to access the Products Page, you would go to `http://localhost:3000/customer/products.`
 
-4. **Track Your Recipes**
-   You can mark recipes as favorites or as completed. To do this, navigate to the recipe details page and click on the corresponding button.
-
-5. **View Your Profile**  
-   Click on the profile icon in the top right corner to view your profile. Here you can see your favorite and completed recipes.
-
-Remember, this is a development server, so changes you make will not persist after the server is stopped.
+Please note that some pages may require you to be logged in, and some may require you to have a specific user role (such as admin or seller).
 
 ## Contributing
 
@@ -134,22 +134,29 @@ This project was created for study purposes and is not currently accepting contr
 
 This project is currently not under any license
 
+## Authors
+
+- João Moreira
+  [joaogmmoreira]
+  (https://github.com/joaogmmoreira)
+
+- Erik Yamamoto
+  [erik-ymmt]
+  (https://github.com/erik-ymmt)
+
+- João Gustavo
+  [João Gustavo]
+  (https://github.com/Joaogustavo789)
+
+- Silvério Moraes
+  [Silverio Moraes]
+  (https://github.com/SilverioMoraes)
+
+- Victor Yuri Tavares de Camargo
+  [VictorYuriTC]
+  (https://github.com/VictorYuriTC)
+
 ## Contact Information
 
 [WebPage](https://www.joaomoreira.net/)
 [Linkedin](https://www.linkedin.com/in/joao-moreira-dev/)
-
-- João Moreira
-  [joaogmmoreira](https://github.com/joaogmmoreira)
-
-- Erik Yamamoto
-  [erik-ymmt](https://github.com/erik-ymmt)
-
-- João Gustavo
-  [João Gustavo](https://github.com/Joaogustavo789)
-
-- Silvério Moraes
-  [Silverio Moraes](https://github.com/SilverioMoraes)
-
-- Victor Yuri Tavares de Camargo
-  [VictorYuriTC](https://github.com/VictorYuriTC)
