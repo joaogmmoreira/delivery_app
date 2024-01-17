@@ -23,36 +23,40 @@ Here are the steps to install and run both the frontend and backend of this proj
 
    1. **Clone the repository**
       First, you need to clone the repository to your local machine. You can do this using the following command in your terminal:
-      ```git clone https://github.com/joaogmmoreira/delivery_app.git```
+      `git clone https://github.com/joaogmmoreira/delivery_app.git`
 
    2. **Navigate to the backend directory**
       Use the following command to navigate into the backend directory:
-      ```cd back-end```
+      `cd back-end`
 
    3. **Install Node.js**
       This project requires Node.js version 16.0.0 or higher. If you don't have Node.js installed, you can download it from the official Node.js website.
 
    4. **Install the dependencies**
       The project dependencies are listed in the package.json file. You can install these dependencies using the following command:
-      ```npm install```
+      `npm install`
 
    5. **Set up the environment variables**
       This project uses environment variables stored in a `.env` file. You need to create this file in the root directory of the project and define the necessary variables. Refer to the `.env.example` file in the project to know which environment variables are needed.
 
    6. **Reset the database**
       This project uses Sequelize for database management. You can reset the database using the following command:
-      ```npm run db:reset```
+      `npm run db:reset`
 
-Start the server: Finally, you can start the server using the following command:
-For development purposes, you can use the following command to start the server with nodemon:
+   7. Start the server: Finally, you can start the server using the following command:
+      `npm start`
+      For development purposes, you can use the following command to start the server with nodemon:
+      `npm run dev`
 
-This will start the server and automatically restart it whenever you make changes to the code.
+   This will start the server and automatically restart it whenever you make changes to the code.
 
-Frontend
-Navigate to the frontend directory: Use the following command to navigate into the frontend directory:
-Install the dependencies: The project dependencies are listed in the package.json file. You can install these dependencies using the following command:
-Start the application: Finally, you can start the application using the following command:
-This will start the application and open it in your default web browser.
+2. Frontend
+   1. Navigate to the frontend directory: Use the following command to navigate into the frontend directory:
+      `cd front-end`
+      cd <frontend-directory>
+   2. Install the dependencies: The project dependencies are listed in the package.json file. You can install these dependencies using the following command:
+      Start the application: Finally, you can start the application using the following command:
+      This will start the application and open it in your default web browser.
 
 Please note that you need to replace <repository-url>, <backend-directory>, and <frontend-directory> with the actual URL of the repository and the names of the backend and frontend directories respectively.
 
