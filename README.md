@@ -24,7 +24,10 @@ Here are the steps to install and run both the frontend and backend of this proj
    1. **Clone the repository**
 
       First, you need to clone the repository to your local machine. You can do this using the following command in your terminal:
-      `git clone https://github.com/joaogmmoreira/delivery_app.git`
+
+      ```bash
+      git clone https://github.com/joaogmmoreira/delivery_app.git
+      ```
 
    2. **Navigate to the backend directory**
 
