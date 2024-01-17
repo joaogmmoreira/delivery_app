@@ -1,7 +1,16 @@
 # Delivery App
 
-This project is a web application built using React.js. It appears to be an e-commerce platform with different user roles such as customer, seller, and admin. The application uses react-router-dom for routing.
-The backend of this project is structured around a MSC architecture, where each controller handles a specific part of the application's functionality.
+This project is a comprehensive web application designed to facilitate the process of online food ordering and delivery. It is built using React.js for the frontend and Node.js for the backend, providing a full-stack solution for an e-commerce platform.
+
+The application supports different user roles, including customers, sellers, and administrators, each with their own unique functionalities and views. This allows for a wide range of interactions and transactions within the platform, from placing and managing orders to overseeing the entire operation.
+
+Frontend
+The frontend of the application is built with React.js, a popular JavaScript library for building user interfaces. It uses react-router-dom for routing, allowing for seamless navigation between different components and views.
+
+Backend
+The backend of the application is structured around a Model-Service-Controller (MSC) architecture. Each controller handles a specific part of the application's functionality, ensuring a clean and organized codebase. The backend handles tasks such as user authentication, data management, and server responses.
+
+The backend also interacts with a database to store and retrieve data. This includes user information, product details, order statuses, and more. The backend uses Sequelize, a promise-based Node.js ORM, for easy data manipulation and query execution.
 
 ## Features
 
