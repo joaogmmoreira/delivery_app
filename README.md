@@ -146,24 +146,19 @@ This project is currently not under any license
 ## Authors
 
 - João Moreira
-  [joaogmmoreira]
-  (https://github.com/joaogmmoreira)
+  [joaogmmoreira](https://github.com/joaogmmoreira)
 
 - Erik Yamamoto
-  [erik-ymmt]
-  (https://github.com/erik-ymmt)
+  [erik-ymmt](https://github.com/erik-ymmt)
 
 - João Gustavo
-  [João Gustavo]
-  (https://github.com/Joaogustavo789)
+  [João Gustavo](https://github.com/Joaogustavo789)
 
 - Silvério Moraes
-  [Silverio Moraes]
-  (https://github.com/SilverioMoraes)
+  [Silverio Moraes](https://github.com/SilverioMoraes)
 
 - Victor Yuri Tavares de Camargo
-  [VictorYuriTC]
-  (https://github.com/VictorYuriTC)
+  [VictorYuriTC](https://github.com/VictorYuriTC)
 
 ## Contact Information
 
