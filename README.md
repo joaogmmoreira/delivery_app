@@ -57,10 +57,9 @@ Here are the steps to install and run both the frontend and backend of this proj
 
       This project uses Sequelize for database management. You can reset the database using the following command:
 
-      ````bash
-      npm run db:reset```
-
-      ````
+      ```bash
+      npm run db:reset
+      ```
 
    7. **Start the server**
 
@@ -79,14 +78,32 @@ Here are the steps to install and run both the frontend and backend of this proj
       This will start the server and automatically restart it whenever you make changes to the code.
 
 2. **Frontend**
-   1. Navigate to the frontend directory: Use the following command to navigate into the frontend directory:
-      `cd front-end`
-      cd <frontend-directory>
-   2. Install the dependencies: The project dependencies are listed in the package.json file. You can install these dependencies using the following command:
-      Start the application: Finally, you can start the application using the following command:
-      This will start the application and open it in your default web browser.
 
-Please note that you need to replace <repository-url>, <backend-directory>, and <frontend-directory> with the actual URL of the repository and the names of the backend and frontend directories respectively.
+   1. **Navigate to the frontend directory**
+
+      Use the following command to navigate into the frontend directory:
+
+   ```bash
+   cd front-end
+   ```
+
+   2. **Install the dependencies**
+
+      The project dependencies are listed in the package.json file. You can install these dependencies using the following command:
+
+      ```bash
+      npm install
+      ```
+
+   3. **Start the application**
+
+   Finally, you can start the application using the following command:
+
+   ```bash
+   npm start
+   ```
+
+   This will start the application and open it in your default web browser.
 
 ## Usage
 
